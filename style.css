@@ -5,11 +5,28 @@ html, body {
 canvas {
   display: block;
 }
+
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 400px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7e7e7e; 
+}
 .flex {
   display: flex;
   height: 100vh;
 }
-
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);; 
+}
 #canvas-container {
   flex: 1;
 }

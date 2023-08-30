@@ -77,6 +77,33 @@ function draw() {
     const parametersPanel = document.getElementById("parameters-panel");
     parametersPanel.innerHTML = `
 
+     <tbody class="text-lg">
+            <tr>
+              <td>
+                <input
+                  class="input input-bordered input-primary px"
+                  style="width: 5.5em"
+                  oninput="UIEvents.bodyDataInputEditing(this)"
+                  type="number"
+                  step="1"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+              <td>
+                <input
+                  class="input input-bordered input-primary py"
+                  style="width: 5.5em"
+                  oninput="UIEvents.bodyDataInputEditing(this)"
+                  type="number"
+                  step="1"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+            </tr>
+          </tbody>
+
 <div class="relative mb-4 flex flex-wrap items-stretch bg-gray-600">
   <div
     class="flex items-center whitespace-nowrap rounded-l border border-r-0 border-solid border-neutral-300 px-3 pb-[0.27rem] pt-[0.25rem] text-center text-base font-normal leading-[1.6] text-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200">

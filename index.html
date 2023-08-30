@@ -11,8 +11,106 @@
   <body>
     <main>
     </main>
-    <div id="parameters-panel" class="dark hidden bg-gray-200 params">
+    <div id="parameters-panel" class="dark bg-gray-200 params">
       <!-- Parameters editing panel -->
+      <div
+      class="collapse collapse-plus bg-base-200 mt-2 hidden bodyDataControl"
+      id="bodyDataLayout"
+    >
+      <input type="checkbox" />
+      <div class="collapse-title text-xl font-medium">
+        <p class="body-circle mb-2 h-12 w-12 rounded-full inline-block" />
+        <p class="collapse-title-label">Body 1 Data</p>
+      </div>
+      <div class="collapse-content">
+        <!-- Body mass readouts -->
+        <p class="text-lg font-semibold">Mass</p>
+        <input
+          class="input input-bordered input-primary mt-3 mb-6 mass"
+          style="width: 5.5em"
+          type="number"
+          step="1"
+          min="1"
+          data-bodyindex="-1"
+        />
+
+        <!-- Body position readouts -->
+        <p class="text-lg font-semibold">Position</p>
+        <table class="table table-zebra">
+          <!-- head -->
+          <thead class="text-lg">
+            <tr>
+              <th>x:</th>
+              <th>y:</th>
+            </tr>
+          </thead>
+          <!-- body -->
+          <tbody class="text-lg">
+            <tr>
+              <td>
+                <input
+                  class="input input-bordered input-primary px"
+                  style="width: 5.5em"
+                  type="number"
+                  step="1"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+              <td>
+                <input
+                  class="input input-bordered input-primary py"
+                  style="width: 5.5em"
+                  type="number"
+                  step="1"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Body velocity readouts -->
+        <p class="text-lg font-semibold mt-4">Velocity</p>
+        <table class="table table-zebra">
+          <!-- head -->
+          <thead class="text-lg">
+            <tr>
+              <th>x:</th>
+              <th>y:</th>
+            </tr>
+          </thead>
+          <!-- body -->
+          <tbody class="text-lg">
+            <tr>
+              <td>
+                <input
+                  class="input input-bordered input-primary vx"
+                  style="width: 5.5em"
+
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+              <td>
+                <input
+                  class="input input-bordered input-primary vy"
+                  style="width: 5.5em"
+
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  data-bodyindex="-1"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
     <script src="https://p5play.org/v3/planck.min.js"></script>
 <script src="https://p5play.org/v3/p5play.js"></script>

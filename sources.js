@@ -37,6 +37,7 @@ class Flashlight extends Reflector{
     this.vertices.push(extrapt1);
   }
   generateRays(componentarr){
+    this.raydensity = min(this.raydensity, 5);
     let rayspacedist = 10 / this.raydensity;
     this.maxID = 0;
     this.rays = [];
@@ -117,7 +118,9 @@ class Sun{
     generateRays(componentarr){
       this.maxID = 0;
       this.updateCoords();
+      this.raydensity = min(this.raydensity, 5);
     let rayspacedist = 10 / this.raydensity;
+    
     for (let i = 0; i < this.width; i += rayspacedist){
       let offset = new Polar(i, this.coords.theta + 90);
       this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta , 250, this.componentID + (this.maxID + 1), 450, this.displayer));
@@ -163,6 +166,7 @@ class Laser extends Reflector{
   generateRays(componentarr){
     this.rays = [];
     this.maxID = 0;
+    this.number = min(this.number, 10);
     for (let i = 0; i < this.number; i ++){
       
       this.maxID += 'r';
@@ -223,7 +227,7 @@ class NormalLight extends Reflector{
     this.type = "NormalLight";
     this.componentID = ID;
     this.wavelength = wavelength;
-    this.thickness = w * 2;
+    this.thickness = w * 1.5;
     this.vertices = [this.start, this.end];
     this.rays = [];
     this.maxID = 'zz';

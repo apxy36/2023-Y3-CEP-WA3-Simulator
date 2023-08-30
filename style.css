@@ -5,3 +5,34 @@ html, body {
 canvas {
   display: block;
 }
+.flex {
+  display: flex;
+  height: 100vh;
+}
+
+#canvas-container {
+  flex: 1;
+}
+
+#parameters-panel {
+  transition: transform 0.3s;
+  position: relative;
+  width: 20vw;
+  height: 200px;
+  
+
+}
+.params {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  bottom:60vh;
+  left:80vw;
+}
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";

@@ -355,16 +355,6 @@ class Ray {
         }
       }
       
-      // for(let k = 0; k < components.length; k++){
-      //   if (k != components.indexOf(component)){
-      //     this.raysegments[i].updateCollision(
-      //     finalresult[2],
-      //     finalresult[3],
-      //     components[k],
-      //     false
-      //   );
-      //   }
-      
       
       if (finalresult[0] == true) {
         //collision detected
@@ -542,7 +532,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               exitangle,
-              500,
+              width * 2,
               this.mainid + (this.maxid + 1), 
               this.wavelength,
               this.rgb
@@ -602,7 +592,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               newangle,
-              500,
+              width * 2,
               this.mainid + (this.maxid + 1),
               this.wavelength,
               this.rgb
@@ -647,7 +637,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               newangle,
-              500,
+              width * 2,
               this.mainid + (this.maxid + 1),
               this.wavelength,
               this.rgb
@@ -689,7 +679,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               newtheta, //the problem here is htat the angles are not being reated properly
-              500,
+              width * 2,
               this.mainid + (this.maxid ),
               this.wavelength,
               this.rgb
@@ -707,7 +697,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               newtheta,
-              500,
+              width * 2,
               this.mainid + (this.maxid),
               this.wavelength,
               this.rgb

@@ -197,6 +197,7 @@ class Laser extends Reflector{
     //console.log(index)
     this.vertices.push(extrapt2);
     this.vertices.push(extrapt1);
+    //console.log(this.vertices);
   }
   display(canvas) {
     canvas.stroke(0);

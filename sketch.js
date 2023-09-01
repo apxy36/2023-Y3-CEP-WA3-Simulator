@@ -71,56 +71,99 @@ function findDifference(s, t) {
 function isCharNumber(c) {
   return c >= '0' && c <= '9';
 }
+
+function styleinput(input, x,y, settings, label){
+    let maininput = createDiv();
+    //bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32
+      maininput.class("mb-4 h-10 flex ");
+      maininput.parent(settings);
+      maininput.position( x,y);
+      let labelinput = createDiv(label);
+      labelinput.parent(maininput);
+      labelinput.class(" w-7 h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
+      //let x = createInput(params[i+1][1].x);
+      input.style("width", "4em");
+      // x.style("margin-left", "1em");
+      // x.style("margin-right", "1em");
+      // x.style("margin-bottom", "0.5em");
+      // x.style("border-radius", "0.5em");
+      input.parent(maininput);
+      input.class("h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
+
+
+    // input.style("width", "4em");
+    // input.style("margin-left", "1em");
+    // input.style("margin-right", "1em");
+    // input.style("margin-bottom", "0.5em");
+    // input.class("block w-full p-4 h-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
+    // input.position(x,y);
+    // input.parent(settings);
+}
 function setting(params){ //convert everything in terms of displayheight and displaywidth
   let settings = createDiv();
   settings.position(windowWidth * 0.8, 0);
   settings.style("height",  '100vh');
   settings.style("width", '20vw');
   settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
+  settings.style("border rounded-sm transform scale-0 absolute transition duration-150 ease-in-out origin-top min-w-32")
   if (params.length > 0 && selected != -1){
 for (let i = 0; i < params.length - 1; i++){
     let label = createSpan(params[i+1][0]);
-    label.style("color", "black");
-    label.style("font-size", "1.5em");
-    label.style("font-family", "monospace");
-    label.style("display", "block");
-    label.style("padding-top", "1em");
-    label.style("padding-left", "1em");
-    label.style("padding-bottom", "0.5em");
-    label.style("padding-right", "0.5em");
+    // label.style("color", "black");
+    // label.style("font-size", "1.5em");
+    // label.style("font-family", "monospace");
+    // label.style("display", "block");
+    // label.style("padding-top", "1em");
+    // label.style("padding-left", "1em");
+    // label.style("padding-bottom", "0.5em");
+    // label.style("padding-right", "0.5em");
+    label.class("block mb-2 text-sm font-medium text-gray-900 dark:text-white");
     label.parent(settings);
-    label.position( 10, 300 + 70 * (i));
+    label.position( 10, 320 + 80 * (i));
     label.innerHTML = params[i+1][0];
     if (params[i+1][0] == "Position"){
+      // let mainx = createDiv();
+      // mainx.class("mb-4 h-10 flex ");
+      // mainx.parent(settings);
+      // mainx.position( displayWidth / 500, 300 + 80 * (i) + 50);
+      // let labelx = createDiv('x:');
+      // labelx.parent(mainx);
+      // labelx.class(" w-7 h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
       let x = createInput(params[i+1][1].x);
       x.style("width", "4em");
-      x.style("margin-left", "1em");
-      x.style("margin-right", "1em");
-      x.style("margin-bottom", "0.5em");
-      x.style("border-radius", "0.5em");
-      x.style("border", "none");
-      x.style("background", "white");
-      x.style("padding-left", "0.5em");
-      x.style("padding-right", "0.5em");
-      x.style("padding-top", "0.5em");
-      x.style("padding-bottom", "0.5em");
-      x.position( displayWidth / 500, 300 + 70 * (i) + 50);
-      //x.input(changeX);
-      x.parent(settings);
+      // x.style("margin-left", "1em");
+      // x.style("margin-right", "1em");
+      // x.style("margin-bottom", "0.5em");
+      // x.style("border-radius", "0.5em");
+      styleinput(x, displayWidth / 200, 300 + 80 * (i) + 50, settings, "x:");
+      //x.class("h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
+      //x.parent(mainx);
+      // x.style("border", "none");
+      // x.style("background", "white");
+      // x.style("padding-left", "0.5em");
+      // x.style("padding-right", "0.5em");
+      // x.style("padding-top", "0.5em");
+      // x.style("padding-bottom", "0.5em");
+      //styleinput(x, 0,0, mainx);
+      // x.position( displayWidth / 500, 300 + 80 * (i) + 50);
+      // x.parent(settings);
+
       let y = createInput(params[i+1][1].y);
       y.style("width", "4em");
-      y.style("margin-left", "1em");
-      y.style("margin-right", "1em");
-      y.style("margin-bottom", "0.5em");
-      y.style("border-radius", "0.5em");
-      y.style("border", "none");
-      y.style("background", "white");
-      y.style("padding-left", "0.5em");
-      y.style("padding-right", "0.5em");
-      y.style("padding-top", "0.5em");
-      y.style("padding-bottom", "0.5em");
-      y.position( displayWidth / 20 , 300 + 70 * (i) + 50);
-      y.parent(settings);
+      // y.style("margin-left", "1em");
+      // y.style("margin-right", "1em");
+      // y.style("margin-bottom", "0.5em");
+      // y.class("block w-full p-4 h-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500")
+      // // y.style("border-radius", "0.5em");
+      // // y.style("border", "none");
+      // // y.style("background", "white");
+      // // y.style("padding-left", "0.5em");
+      // // y.style("padding-right", "0.5em");
+      // // y.style("padding-top", "0.5em");
+      // // y.style("padding-bottom", "0.5em");
+      // y.position( displayWidth / 20 , 300 + 80 * (i) + 50);
+      styleinput(y, displayWidth / 15 , 300 + 80 * (i) + 50, settings, "y:");
+      //y.parent(settings);
       x.input(function () {
         if (isCharNumber(findDifference( str(params[i+1][1].x), x.value())) || isCharNumber(findDifference( x.value(), str(params[i+1][1].x)))){
           if (x.value() == ""){
@@ -148,17 +191,26 @@ for (let i = 0; i < params.length - 1; i++){
       });
       x.attribute("data-bodyindex", selected);
       y.attribute("data-bodyindex", selected);
-    } else if (params[i+1][0] == "angle"){
-      let angle = createInput(params[i+1][1]);
-      angle.style("width", "5em");
+    } else if (params[i+1][0] == "Angle"){
+      let angle = createSlider(0,360,params[i+1][1].theta,1);
+      //styleinput(angle, windowWidth / 200, 300 + 70 * (i) + 50, settings);
+      angle.position(windowWidth / 100, 300 + 80 * (i) + 50);
+      //angle.class("block mb-2 text-sm font-medium text-gray-900 dark:text-white");
+      angle.parent(settings);
+      angle.class("w-4/5 h-2 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-blue-500");
+      //angle.class("range pr-6 accent-red-500");
+      angle.input(function () {
+        console.log(angle.value())
+        totalarr[selected].setRotation(angle.value());
+        totalarr[selected].coords.theta = angle.value();
+        
+        updateComponents();
+      });
+  }
+  }
+}
+}
 
-  }
-  }
-}
-}
-function xx(){
-  console.log(333)
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -325,11 +377,11 @@ function mouseReleased(){
 function findEditableData(obj){
     if (obj.type == "reflector"){
       return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2]]; //position, rotation, width
-    } else if (obj.type == "refractor"){
+    } else if (obj.constructor.name == "Refractor"){
       return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Refractive Coefficients", obj.rcoeffs]];
     } else if (obj.type == "CLens" || obj.type == "DLens"){
       return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Focal Length", obj.flength]];
-    } else if (obj.type == "Prism"){
+    } else if (obj.constructor.name == "Prism"){
       return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Refractive Coefficients", obj.rcoeffs]];
     } else if (obj.type == "DiffractionGrating"){
       return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Maximum Order", obj.maxorder], ["Slit Separation Distance", obj.slitdist]];

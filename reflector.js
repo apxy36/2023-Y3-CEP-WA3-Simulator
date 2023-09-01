@@ -164,6 +164,30 @@ class Reflector {
     this.displayer.stroke(0)
     this.displayer.fill('white');
   }
+  setRotation(rotation) {
+    /*  
+    Rotating 2D Polygon in JS (PothOnProgramming)
+        https://youtu.be/3kICmEJ-xyo?t=436      
+    */
+    let degrees = rotation - this.coords.theta;
+    let unit_x = cos(degrees);
+    let unit_y = sin(degrees);
+    //console.log(unit_x, unit_y)
+    for (let index = 0; index < this.vertices.length; index++) {
+      let vertex = this.vertices[index];
+
+      // Translate the vertex to the origin.
+      let vector_x = vertex.x - this.pos.x;
+      let vector_y = vertex.y - this.pos.y;
+
+      vertex.x = vector_x * unit_x - vector_y * unit_y + this.pos.x;
+      vertex.y = vector_x * unit_y + vector_y * unit_x + this.pos.y;
+      //console.log(vertex)
+    }
+    //console.log(this.vertices)
+    this.coords.theta = rotation;
+  }
+
   
   
 }

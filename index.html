@@ -34,11 +34,6 @@
   </style>
   </head>
   <body>
-    <main>
-    </main>
-    <div id="parameters-panel" class="dark bg-gray-200 params">
-      
-    </div>
     <script src="https://p5play.org/v3/planck.min.js"></script>
 <script src="https://p5play.org/v3/p5play.js"></script>
     <script src="sketch.js"></script>
@@ -48,7 +43,25 @@
     <script src="selector.js"></script>
     <script src="polar.js"></script>
     <script src="UIEvents.js"></script>
+    <main>
+      <!-- <div class="relative h-32 w-32" dir = 'ltr'>
+  <div class="relative sticky bottom-0 right-0 h-16 w-16">0?9</div>
+</div> -->
+    </main>
     
+    
+
+
+    <div id="parameters-panel" class="dark bg-gray-200 bottom-0 right-0 w-4/5 h-full border rounded-sm transform scale-0 absolute transition duration-150 ease-in-out origin-top min-w-32">
+      <div class="flex flex-col h-full">
+        <div class="flex flex-row justify-between items-center p-2">
+          <div class="flex flex-row items-center">
+            <div class="flex flex-col">
+              <div class="text-sm font-medium text-gray-900">Parameters</div>
+              <div class="text-xs font-light text-gray-500">Change the parameters of the simulation</div>
+    </div>
+    <!-- Pin to bottom right corner -->
+
     
     
     <script defer src="https://unpkg.com/p5.collide2d">

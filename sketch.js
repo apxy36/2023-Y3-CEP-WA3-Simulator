@@ -127,6 +127,20 @@ function styleinput2(input, x,y, main, label, w = "7"){
     // input.parent(settings);
 }
 
+function styleTable(input, x,y, body, label, w = "7"){
+  let maininput = createElement("td");
+  maininput.class("whitespace-nowrap text-left  px-6 py-2 font-medium");
+  maininput.parent(body);
+  let subinput = createElement("div");
+  subinput.class("mb-4 h-10 flex left-0 sticky w-35");
+  subinput.parent(maininput);
+  let labelinput = createDiv(label);
+  labelinput.parent(subinput);
+  labelinput.class(" w-" +w+ " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
+  input.parent(subinput);
+  input.class("h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
+}
+
 function setting(params, parent){ //convert everything in terms of displayheight and displaywidth
   let settings = createDiv();
   //settings.parent(parent);
@@ -275,42 +289,146 @@ for (let i = 0; i < params.length - 1; i++){
       });
   } else if (params[i+1][0] == "Refractive Coefficients"){
     let rcoeffs = createElement("table");
+rcoeffs.class("table-fixed space-y-3");
+
+rcoeffs.position(windowWidth / 200, 30 + 80 * (i) + 50);
+rcoeffs.class("inline-block overflow-x-auto flex flex-col overflow-hidden bg-gray-500 h-1/3 w-full text-center text-sm font-light rounded-lg");
+
+let thead = createElement("tr");
+thead.parent(rcoeffs);
+thead.class("font-medium min-w-full bg-gray-600 px-8 py-4 bg-gray-700 text-neutral-50 border-b font-bold text-sm");
+
+let b = createElement("th");
+b.parent(thead);
+b.class("w-1/2 px-4 py-2"); // Set the width of the column and add padding
+
+let bval = createSpan("B Coefficients");
+bval.class("text-white"); // Add text color
+b.child(bval);
+
+let c = createElement("th");
+c.parent(thead);
+c.class("w-1/2 px-4 py-2"); // Set the width of the column and add padding
+
+let cval = createSpan("C Coefficients");
+cval.class("text-white"); // Add text color
+c.child(cval);
+
+    // let rcoeffs = createElement("table");
+    // rcoeffs.class("table-fixed space-y-3");
     
-    rcoeffs.position(windowWidth / 200, 30 + 80 * (i) + 50);
-    rcoeffs.class("flex flex-col overflow-hidden bg-gray-300 h-1/3 w-full text-center text-sm font-light rounded-lg");
+    // rcoeffs.position(windowWidth / 200, 30 + 80 * (i) + 50);
+    // rcoeffs.class("inline-block overflow-x-auto flex flex-col overflow-hidden bg-gray-500 h-1/3 w-full text-center text-sm font-light rounded-lg");
 
-    let thead = createElement("tr");
-    thead.parent(rcoeffs);
-    thead.class("font-medium");
-
-    let b = createElement("th");
-    b.class("px-6 py-4 bg-gray-100 text-gray-600 ");
-    b.attribute("scope", "col");
-    let bval = createSpan("B Coefficients");
-    //bval.class()
-    b.child(bval);
-    //b.value("B Coefficients");
-    // let b1input = createInput(params[i+1][1][0][0]); //b1 coefficient
-    // b1input.style("width", "4em");
+    // let thead = createElement("tr");
+    // thead.parent(rcoeffs);
+    // thead.class("font-medium min-w-full bg-gray-600 px-8 py-4 bg-gray-700 text-neutral-50 border-b font-bold text-sm ");
     
-    // styleinput2(b1input, windowWidth / 200, 0,0, b1, "B1:", "20");
+    // let b = createElement("th");
+    // b.parent(thead);
+    // //b.class("px-8 py-4 bg-gray-700 text-neutral-50 border-b border-gray-200 font-bold text-sm text-left");
+    // //b.class(" w-1/2 text-sm");
+    // b.attribute("scope", "col");
+    // b.class("w-1/2")
+    
+    // let bval = createSpan("B Coefficients");
+    // //bval.class()
+    // b.child(bval);
+    // b.value("B Coefficients");
+    // // let b1input = createInput(params[i+1][1][0][0]); //b1 coefficient
+    // // b1input.style("width", "4em");
+    
+    // // styleinput2(b1input, windowWidth / 200, 0,0, b1, "B1:", "20");
 
-    // b1.child(b1input);
-    thead.child(b);
+    // // b1.child(b1input);
+    // //thead.child(b);
 
 
-    let c = createElement("th");
-    c.class("px-6 py-4 bg-gray-100 text-gray-600 border-b border-gray-200 font-bold uppercase text-sm text-left");
-    c.attribute("scope", "col");
-    let cval = createSpan("C Coefficients");
-    c.child(cval);
+    // let c = createElement("th");
+    // c.class("left-2/3 text-sm");
+    // c.parent(thead);
+    
+    // //c.class("px-8 py-4 bg-gray-700 text-neutral-50 border-b border-gray-200 font-bold text-sm text-left");
+    // c.attribute("scope", "col");
+    
+    // let cval = createSpan("C Coefficients");
+    // cval.class("l-2/3 text-sm");
+    // c.child(cval);
     // let b2input = createInput(params[i+1][1][0][0]); //c1 coefficient
     // b2input.style("width", "4em");
     // b2.child(b2input);
     // styleinput2(b2input, windowWidth / 200, 0,0, b2, "B2:", "20");
-    thead.child(c);
+    //thead.child(c);
+    let tbody = createElement("tbody");
+    tbody.parent(rcoeffs);
+    
+    let tr1 = createElement("tr");
+    tr1.parent(tbody);
+    //tr.class("text-left")
+    let b1input = createInput(params[i+1][1][0][0]); //b1 coefficient
+    b1input.style("width", "4em");
+    styleTable(b1input, windowWidth / 200, 0, tr1, "B1:", "7");
+    // let mainb1 = createElement("td");
+    // mainb1.class("whitespace-nowrap text-left  px-6 py-4 font-medium");
+    // mainb1.parent(tr);
+    // let subb1 = createElement("div");
+    // subb1.class("mb-4 h-10 flex left-0 sticky w-35");
+    // subb1.parent(mainb1);
+    // let labelb1 = createDiv("B1:");
+    // labelb1.parent(subb1);
+    // labelb1.class(" w-7 h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
+    // b1input.parent(subb1);
+    // b1input.class("h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
+    // //styleinput(b1input, windowWidth / 200, 0,0, b1, "B1:", "10");
+    let c1input = createInput(params[i+1][1][1][0]); //c1 coefficient
+    c1input.style("width", "6em");
+    styleTable(c1input, windowWidth / 200, 0, tr1, "C1:", "7");
 
+    let tr2 = createElement("tr");
+    tr2.parent(tbody);
+    tr2.class("whitespace-nowrap px-6 py-4")
+    let b2input = createInput(params[i+1][1][0][1]); //b2 coefficient
+    b2input.style("width", "6em");
+    styleTable(b2input, windowWidth / 200, 0, tr2, "B2:", "7");
 
+    let c2input = createInput(params[i+1][1][1][1]); //c2 coefficient
+    c2input.style("width", "6em");
+    styleTable(c2input, windowWidth / 200, 0, tr2, "C2:", "7");
+
+    let tr3 = createElement("tr");
+    tr3.parent(tbody);
+    let b3input = createInput(params[i+1][1][0][2]); //b3 coefficient
+    b3input.style("width", "6em");
+    styleTable(b3input, windowWidth / 200, 0, tr3, "B3:", "7");
+    let c3input = createInput(params[i+1][1][1][2]); //c3 coefficient
+    c3input.style("width", "6em");
+    styleTable(c3input, windowWidth / 200, 0, tr3, "C3:", "7");
+
+    //styleTable(b1input, windowWidth / 200, 0, tbody, "B1:", "10");
+    //console.log(params[i+1][1].length);
+    console.log(params[i+1][1])
+    // for (let j = 0; j < 3; j++){ //repeat 3 times
+      
+    //   let tr = createElement("tr");
+    //   tr.parent(tbody);
+    //   let b = createElement("td");
+    //   tr.child(b);
+    //   //console.log(params[i+1][1][j][0])
+    //   let bval = createInput(params[i+1][1][0][j]);
+    //   bval.style("width", "4em");
+    //   console.log("B" + (j +1)+ ":");
+    //   styleinput2(bval, windowWidth / 200, 0,0, b, "B" + (j +1)+ ":", "20");
+    //   b.child(bval);
+    //   let c = createElement("td");
+    //   let cval = createInput(params[i+1][1][1][j]);
+    //   cval.style("width", "4em");
+    //   styleinput2(cval, windowWidth / 15, 0,0, c, "C" + (j+1) + ":", "20");
+    //   c.child(cval);
+
+      
+
+    // }
+    
     //rcoeffs.child(thead)
     rcoeffs.parent(settings);
   }

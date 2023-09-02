@@ -555,9 +555,11 @@ class Ray {
           if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) == 0){
             paralleltheta = component.coords.theta + 90;
             focalpttheta = component.coords.theta + 90;
+            component.side = 0;
           } else {
             paralleltheta = component.coords.theta - 90;
             focalpttheta = component.coords.theta - 90;
+            component.side = 1;
           }
           let tempray = new RayComponent(this.raysegments[i].start, paralleltheta, width, "TEMP");
           component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());
@@ -608,9 +610,11 @@ class Ray {
           if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) == 0){ //double check //theta works
             paralleltheta = component.coords.theta + 90;
             focalpttheta = component.coords.theta - 90;
+            component.side = 0;
           } else {
             paralleltheta = component.coords.theta - 90;
             focalpttheta = component.coords.theta + 90;
+            component.side = 1;
           }
           let tempray = new RayComponent(this.raysegments[i].start, paralleltheta, width, "TEMP");
           component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());

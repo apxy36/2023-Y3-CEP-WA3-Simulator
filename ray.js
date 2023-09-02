@@ -335,7 +335,7 @@ class Ray {
     
     //this.raysegments[0].pos.theta = this.angle;
     this.raysegments = [
-      new RayComponent(this.origin, this.angle, width * 3, this.mainid, this.wavelength, this.rgb),
+      new RayComponent(this.origin, this.angle, width * 2, this.mainid, this.wavelength, this.rgb),
     ];
     this.maxid = 0;
     //this.raysegments = this.raysegments.slice(0,1);

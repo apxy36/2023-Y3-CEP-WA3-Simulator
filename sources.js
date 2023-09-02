@@ -99,7 +99,7 @@ class Flashlight extends Reflector{
 
 class Sun{
   constructor( w, raydensity, angle, ID, wavelength, display){
-    let poscoord = new Polar(width*2, angle);
+    let poscoord = new Polar(width*1.5, angle);
     this.pos = p5.Vector.add(poscoord.convertCartesian(), createVector(width/2, height/2)); //out of canvas, rotating ard point
     this.width = w; 
     this.coords = new Polar(w / 2, angle + 90); //width of the ray 
@@ -117,6 +117,7 @@ class Sun{
     this.rays = [];
     this.maxID = 0;
     this.displayer = display;
+    this.rgb = wavelengthToColor(wavelength)[0];
 
 
     //draggable functionality
@@ -130,16 +131,17 @@ class Sun{
     this.displayvertices = [];
     let offsetcoord1 = new Polar(height / 2, this.coords.theta);
     let offsetvector1 = offsetcoord1.convertCartesian();
-    let offsetcoord2 = new Polar(height / 2.2, this.coords.theta);
+    let offsetcoord2 = new Polar(height / 3, this.coords.theta);
     let offsetvector2 = offsetcoord2.convertCartesian();
-    let middle = createVector(width/2, height/2);
-    let middle1 = p5.Vector.add(middle, this.coords.convertCartesian());
-    let middle2 = p5.Vector.sub(middle, this.coords.convertCartesian());
+    this.middle = createVector(width/2, height/2);
+    let middle1 = p5.Vector.add(this.middle, this.coords.convertCartesian());
+    let middle2 = p5.Vector.sub(this.middle, this.coords.convertCartesian());
     let extrapt1 = p5.Vector.add(middle1, offsetvector1);
     let extrapt2 = p5.Vector.add(middle1, offsetvector2);
     let extrapt3 = p5.Vector.add(middle2, offsetvector2);
     let extrapt4 = p5.Vector.add(middle2, offsetvector1);
     this.displayvertices = [extrapt1, extrapt2, extrapt3, extrapt4];
+    
   }
     generateRays(componentarr){
       this.maxID = 0;
@@ -151,22 +153,25 @@ class Sun{
     
     for (let i = 0; i < this.width; i += rayspacedist){
       let offset = new Polar(i, this.coords.theta);
-      this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta + 90, 250, this.componentID + (this.maxID + 1), 450, this.displayer));
+      this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta -90, 250, this.componentID + (this.maxID + 1), 450, this.displayer));
       this.rays[this.rays.length - 1].generate(componentarr);
       this.rays[this.rays.length - 1].display(this.displayer);
       this.maxID += 1;
     }
   }
   updateCoords(){
+    let poscoord = new Polar(width*1.5, this.coords.theta +90);
+    this.pos = p5.Vector.add(poscoord.convertCartesian(), this.middle); //out of canvas, rotating ard point
     this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
-    let offsetcoord1 = new Polar(height / 2, this.coords.theta);
+    let offsetcoord1 = new Polar(height / 1.75, this.coords.theta + 90);
     let offsetvector1 = offsetcoord1.convertCartesian();
-    let offsetcoord2 = new Polar(height / 2.2, this.coords.theta);
+    let offsetcoord2 = new Polar(height / 2.5, this.coords.theta + 90);
     let offsetvector2 = offsetcoord2.convertCartesian();
-    let middle = createVector(width/2, height/2);
-    let middle1 = p5.Vector.add(middle, this.coords.convertCartesian());
-    let middle2 = p5.Vector.sub(middle, this.coords.convertCartesian());
+
+
+    let middle1 = p5.Vector.add(this.middle, this.coords.convertCartesian());
+    let middle2 = p5.Vector.sub(this.middle, this.coords.convertCartesian());
     let extrapt1 = p5.Vector.add(middle1, offsetvector1);
     let extrapt2 = p5.Vector.add(middle1, offsetvector2);
     let extrapt3 = p5.Vector.add(middle2, offsetvector2);
@@ -181,7 +186,6 @@ class Sun{
     this.dragged = true;
     this.offsetX = this.pos.x - mouseX;
     this.offsetY = this.pos.y - mouseY;
-    console.log(this.offsetX, this.offsetY)
   }
   released(){
     this.dragged = false;
@@ -198,19 +202,21 @@ class Sun{
     //visuals
     if (this.selected){
       this.displaySelect(this.displayer);
+      //this.display(this.displayer);
     }
     
   }
   
   setPos(x,y){
+    
     let vector_x = x - this.pos.x;
     let vector_y = y - this.pos.y;
-
-    for (let index = 0; index < this.vertices.length; index++) {
+    this.middle = p5.Vector.sub(this.middle, createVector( -vector_x, -vector_y));
+    for (let index = 0; index < this.displayvertices.length; index++) {
       let vertex = this.vertices[index];
 
-      this.vertices[index].x += vector_x;
-      this.vertices[index].y += vector_y;
+      this.displayvertices[index].x += vector_x;
+      this.displayvertices[index].y += vector_y;
     }
 
     this.pos.x += vector_x;
@@ -234,26 +240,28 @@ class Sun{
     let centre = findCentre(this.displayvertices);
     this.displayer.stroke(100)
     this.displayer.circle(centre.x, centre.y, 10);
-    this.displayer.stroke(0)
-    this.displayer.fill('white');
-  }
-  setRotation(rotation) {
-    this.coords.theta = rotation;
-    this.updateCoords();
-  }
-  display(canvas){
-    //console.log(this.displayvertices)
+    this.displayer.stroke(0);
+    //this.displayer.fill('white');
     canvas.stroke(0);
-    if (this.selected){
-      
-    }
-    canvas.fill('white');
+    //canvas.fill(200,200,200,100);
+    canvas.push();
+
     canvas.beginShape();
     for (let i = 0; i < this.displayvertices.length; i++) {
       let pointer = this.displayvertices[i];
       canvas.vertex(pointer.x, pointer.y);
     }
     canvas.endShape(CLOSE);
+    canvas.pop();
+    canvas.fill('white');
+  }
+  setRotation(rotation) {
+    this.coords.theta = rotation;
+    this.updateCoords();
+  }
+  display(canvas){
+    
+    //canvas.pop();
     this.update();
   } //empty bc sun is not displayed
   

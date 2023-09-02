@@ -557,9 +557,6 @@ function updateComponents(){
         //console.log(totalarr[i].type);
         totalarr[i].generateRays(componentarr);
         totalarr[i].display(sandbox);
-        if (totalarr[i].type != "Sun"){
-        
-        }
       }
     }
 }

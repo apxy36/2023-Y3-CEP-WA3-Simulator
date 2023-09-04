@@ -30,17 +30,17 @@ class UIEventHandler {
     this.createButton(
       this.leftinputbar,
       "sources",
-      "/src/icons/flashlight-outline.svg",
+      "./src/icons/flashlight-outline.svg",
       true,
       "Add Light Sources",
       true,
       [
         ["Normal_Light", "Flashlight", "Laser", "Sun"],
         [
-          "/src/icons/light-bulb.svg",
-          "/src/icons/flashlight-outline.svg",
-          "/src/icons/laser-blast.svg",
-          "/src/icons/sunny-outline.svg",
+          "./src/icons/light-bulb.svg",
+          "./src/icons/flashlight-outline.svg",
+          "./src/icons/laser-blast.svg",
+          "./src/icons/sunny-outline.svg",
         ],
         [true, true, false, true],
       ]
@@ -48,7 +48,7 @@ class UIEventHandler {
     this.createButton(
       this.leftinputbar,
       "reflectors",
-      "/src/icons/mirror-mirror.svg",
+      "./src/icons/mirror-mirror.svg",
       false,
       "Add Reflectors etc.",
       true,
@@ -62,12 +62,12 @@ class UIEventHandler {
           "Diverging_Lens",
         ],
         [
-          "/src/icons/mirror-mirror.svg",
-          "/src/icons/refractor.svg",
-          "/src/icons/prism-outline.svg",
-          "/src/icons/grating.svg",
-          "/src/icons/clens.svg",
-          "/src/icons/dlens.svg",
+          "./src/icons/mirror-mirror.svg",
+          "./src/icons/refractor.svg",
+          "./src/icons/prism-outline.svg",
+          "./src/icons/grating.svg",
+          "./src/icons/clens.svg",
+          "./src/icons/dlens.svg",
         ],
         [false, true, true, true, true, true, true],
       ]
@@ -75,7 +75,7 @@ class UIEventHandler {
     this.createButton(
       this.leftinputbar,
       "presets",
-      "/src/icons/presets.svg",
+      "./src/icons/presets.svg",
       true,
       "Use Presets",
       true,
@@ -88,11 +88,11 @@ class UIEventHandler {
           "Diffraction Grating",
         ],
         [
-          "/src/icons/image+lens-preset.svg",
-          "/src/icons/sun+lens-preset.svg",
-          "/src/icons/telescope-preset.svg",
-          "/src/icons/rainbow-preset.svg",
-          "/src/icons/diffraction-preset.svg",
+          "./src/icons/image+lens-preset.svg",
+          "./src/icons/sun+lens-preset.svg",
+          "./src/icons/telescope-preset.svg",
+          "./src/icons/rainbow-preset.svg",
+          "./src/icons/diffraction-preset.svg",
         ],
         [true, false, true, true, true],
       ]
@@ -100,7 +100,7 @@ class UIEventHandler {
     this.createButton(
       this.leftinputbar,
       "help",
-      "/src/icons/help-circle-outline.svg",
+      "./src/icons/help-circle-outline.svg",
       true,
       "Need Help?",
       false
@@ -114,7 +114,7 @@ class UIEventHandler {
     this.createButton(
       this.leftinputbar,
       "Delete",
-      "/src/icons/trash-outline.svg",
+      "./src/icons/trash-outline.svg",
       false,
       "Delete",
       false
@@ -984,7 +984,7 @@ class UIEventHandler {
         }
       }
     }
-    //UIEventHandler1.createButton(settings,"Delete", "/src/icons/trash-outline.svg", false, "Delete", false, );
+    //UIEventHandler1.createButton(settings,"Delete", "./src/icons/trash-outline.svg", false, "Delete", false, );
     if (selector == false) {
       settings.elt.classList.remove("scale-100");
       settings.elt.classList.add("scale-0");

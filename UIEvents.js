@@ -12,6 +12,7 @@ class UIEventHandler {
     this.maxid = tarr.length;
     this.buttons = [];
     this.buttonIDs = [];
+    this.buttonparents = [];
     //this.mainsettings.id("mainsettings");
   }
   bodyDataInputEditing(input, property) {
@@ -31,9 +32,46 @@ class UIEventHandler {
     this.createButton(this.leftinputbar, "presets", "/src/icons/presets.svg", true, "Use Presets",  false);
     this.createButton(this.leftinputbar, "help", "/src/icons/help-circle-outline.svg", true, "Help", false);
   }
+  displayDeleted(div){
+    let deleter = select("#Deleteparent");
+    if (deleter != null){
+      deleter.remove();
+    }
+    this.createButton(this.leftinputbar, "Delete", "/src/icons/trash-outline.svg", false, "Delete", false);
+    this.toggleDeleted(false);
+  }
+  toggleDeleted(bool){
+    console.log(this.buttons[this.buttonIDs.indexOf("Delete")].elt.scale);
+    if (bool){
+      //appear
+      this.buttons[this.buttonIDs.indexOf("Delete")].elt.classList.remove("scale-0");
+      this.buttons[this.buttonIDs.indexOf("Delete")].elt.classList.add("scale-100");
+    } else {
+      //disappear
+      this.buttons[this.buttonIDs.indexOf("Delete")].elt.classList.remove("scale-100");
+      this.buttons[this.buttonIDs.indexOf("Delete")].elt.classList.add("scale-0");
+    }
+  }
   createButton(parent, id, icon, invert, label, expandable, secondbardata) {
+    if (id == "Delete"){  //parentimg is the problem -> keeps spawining new buttons
+      for (let i = 0; i < this.buttonIDs.length; i++){
+        if (this.buttonIDs[i] == "Delete"){
+          let parentbutton = this.buttonparents[i].id();
+          let deleter = select("#Deleteparent");
+          if (deleter != null){
+            deleter.remove();
+          }
+          this.buttonIDs.splice(i, 1);
+          this.buttons.splice(i, 1);
+          //return this.buttons[i]; //return null -> does not spawn new button
+        } //returns null if delete?
+      }
+      
+    }
     let parentimg = createDiv();
     parentimg.parent(parent);
+    parentimg.id(id + "parent");
+    this.buttonparents.push(parentimg);
     parentimg.class('flex group hover:scale-110 transition-all duration-300 ease-linear');
     let buttonimg = createImg(icon, "");
     buttonimg.parent(parentimg);
@@ -42,7 +80,13 @@ class UIEventHandler {
     if (invert){
       buttonimg.class("relative flex items-center filter invert justify-center w-12 h-12  mt-2 mb-2 mx-auto bg-secondary rounded-full shadow-lg cursor-pointer hover:bg-invertedindigo hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none transition-all duration-300 ease-linear");
     } else {
-      buttonimg.class("relative flex items-center justify-center w-12 h-12  mt-2 mb-2 mx-auto bg-gray-800 rounded-full shadow-lg cursor-pointer hover:bg-indigo-400 hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none transition-all duration-300 ease-linear");
+      buttonimg.class("relative flex items-center justify-center w-12 h-12  mt-2 mb-2 mx-auto bg-gray-800 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none transition-all duration-300 ease-linear");
+    }
+    if (id == "Delete"){
+      parentimg.class("flex flex-col group hover:scale-110 transition-all duration-300 ease-linear h-12 bottom-0 w-full");
+      buttonimg.class("b-0 relative flex items-center justify-center w-24 h-12  mt-2 mb-2 mx-auto bg-rose-600 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none transition-all duration-300 ease-linear")
+      //console.log(this.buttonIDs)
+      parentimg.position(0, height-84);
     }
     //buttonimg.elt.classList.add("bg-primary");
     buttonimg.id(id);
@@ -60,33 +104,35 @@ class UIEventHandler {
     if (expandable){
       this.createSecondInputBar(secondbardata[0], secondbardata[1], secondbardata[2], parentimg);
     }
+    return buttonimg;
   }
   spawnObjects(selected, id){
-    console.log(selected);
+    //console.log(selected);
     let component;
+    let position = createVector(width/2 + random(-100,100), height/2 + random(-100,100));
     if (selected == "Laser" || selected == "Flashlight" || selected == "Normal_Light" || selected == "Sun"){
       if (selected == "Laser"){
-        component = new Laser(createVector(width/2, height/2), 20, 0, id, 8, this.displayer);
+        component = new Laser(position, 20, 0, id, 8, this.displayer);
       } else if (selected == "Flashlight"){
-        component = new Flashlight(createVector(width/2, height/2), 20, 2, 0, id, 600, this.displayer);
+        component = new Flashlight(position, 20, 2, 0, id, 600, this.displayer);
       } else if (selected == "Normal_Light"){
-        component = new NormalLight(createVector(width/2, height/2), 20, 0, id, 600, this.displayer);
+        component = new NormalLight(position, 20, 0, id, 600, this.displayer);
       } else if (selected == "Sun"){
         component = new Sun(100, 1, 0, id, 600, this.displayer);
       } 
     } else {
       if (selected == "Mirror"){
-        component = new Reflector(createVector(width/2, height/2), 50, 0, id, this.displayer);
+        component = new Reflector(position, 50, 0, id, this.displayer);
       } else if (selected == "Refractor"){
-        component = new Refractor(createVector(width/2, height/2), 50, 0, id, 50, 1.5,[[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]] ,this.displayer);
+        component = new Refractor(position, 50, 0, id, 50, 1.5,[[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]] ,this.displayer);
       } else if (selected == "Prism"){
-        component = new Prism(createVector(width/2, height/2), 50, 0, id, [createVector(0,0), createVector(100,0), createVector(40, -50)], 1.5,[[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]] ,this.displayer);
+        component = new Prism(position, 50, 0, id, [createVector(0,0), createVector(100,0), createVector(40, -50)], 1.5,[[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]] ,this.displayer);
       } else if (selected == "Grating"){
-        component = new DiffractionGrating(createVector(width/2, height/2), 50, 0, id, 2.2,3 ,this.displayer);
+        component = new DiffractionGrating(position, 50, 0, id, 2.2,3 ,this.displayer);
       } else if (selected == "Converging_Lens"){
-        component = new ConvergingLens(createVector(width/2, height/2), 50, 0, id, 150,this.displayer);
+        component = new ConvergingLens(position, 50, 0, id, 150,this.displayer);
       } else if (selected == "Diverging_Lens"){
-        component = new DivergingLens(createVector(width/2, height/2), 50, 0, id, 150,this.displayer);
+        component = new DivergingLens(position, 50, 0, id, 150,this.displayer);
       }
 
       }

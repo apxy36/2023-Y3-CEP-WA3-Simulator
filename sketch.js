@@ -208,8 +208,13 @@ function updateRcoeffs(lowerbounds, upperbounds, coeffinputs, params, paramindex
   
 }
 
-function setting(params, selector){ //convert everything in terms of displayheight and displaywidth
+function setting(params, selector, parent){ //convert everything in terms of displayheight and displaywidth
+  let remover = select("#mainsettings");
+  if (remover != null){
+    remover.remove();
+  }
   let mainsettings = createDiv();
+  mainsettings.id("mainsettings");
   let settings = createElement('ul');
   //settings.parent(parent);
   //settings.position(0,0);
@@ -217,6 +222,7 @@ function setting(params, selector){ //convert everything in terms of displayheig
   mainsettings.style("height",  '100vh');
   mainsettings.style("width", '18vw');
   settings.parent(mainsettings);
+  settings.id("settings");
   //settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
   mainsettings.class("flex h-auto bg-primary border-2 border-primary");
   
@@ -542,16 +548,40 @@ for (let i = 0; i < params.length - 1; i++){
       }
       });
   }
-
-  }
+  
+  // trash.mouseClicked(function(){
+  //   console.log(trash, selected)
+  //   if (selected < componentarr.length){
+  //     //componentarr[selected].remove();
+  //     componentarr.splice(selected, 1);
+  //   }
+     
+  //   //totalarr[selected].remove();
+  //   totalarr.splice(selected, 1);
+  //   selected = null;
+  //   updateComponents();
+  // });
 } 
+  }
+  console.log(settings);
+  //UIEventHandler1.createButton(settings,"Delete", "/src/icons/trash-outline.svg", false, "Delete", false, );
 if (selector == false) {
   
   settings.elt.classList.remove("scale-100");
   settings.elt.classList.add("scale-0");
+  let deleter = select("Deleteparent");
+  if (deleter != null){
+    deleter.elt.classList.remove("scale-100");
+    deleter.elt.classList.add("scale-0");
+  }
 } else {
   settings.elt.classList.remove("scale-0");
   settings.elt.classList.add("scale-100");
+  let deleter = select("Deleteparent");
+  if (deleter != null){
+    deleter.elt.classList.remove("scale-0");
+    deleter.elt.classList.add("scale-100");
+  }
 }
 }
 let UIEventHandler1;
@@ -568,8 +598,11 @@ function findRayById(objects, id) {
   return objectMap.get(id);
 }
 function handleUIClicks(){
-  for (let i = 0; i < UIEventHandler1.buttons.length; i++){
+  console.log(UIEventHandler1.buttons, UIEventHandler1.buttonIDs);
+  console.log(UIEventHandler1.buttons.length)
+  for (let i = 0; i < UIEventHandler1.buttons.length - 1; i++){
     UIEventHandler1.buttons[i].mouseClicked(function(){
+      console.log(UIEventHandler1.buttonIDs[i])
       let add = UIEventHandler1.spawnObjects(UIEventHandler1.buttonIDs[i], maxid);
       if (add != null){
         console.log(totalarr, componentarr, sourcearr)
@@ -581,17 +614,100 @@ function handleUIClicks(){
         }
         totalarr = componentarr.concat(sourcearr);
         maxid+=1;
-        console.log(totalarr, componentarr, sourcearr)
-      }
+        console.log(totalarr, componentarr, sourcearr);
+      } else if (UIEventHandler1.buttonIDs[i] == "Delete"){
+        //console.log(trash, selected)
+        if (selected < componentarr.length){
+          //componentarr[selected].remove();
+          componentarr.splice(selected, 1);
+        }
+         
+        //totalarr[selected].remove();
+        totalarr.splice(selected, 1);
+        selected = -1;
+        updateComponents();
+        editables = [];
+        setting(editables, false);
+      } 
     }); //to prevent the buttons from being clicked
   }
+  console.log(UIEventHandler1.buttons[UIEventHandler1.buttons.length - 1])
+  UIEventHandler1.buttons[UIEventHandler1.buttons.length - 1].mouseClicked(function(){
+    //del button
+    if (selected < componentarr.length){
+      //componentarr[selected].remove();
+      componentarr.splice(selected, 1);
+    }
+      
+    //totalarr[selected].remove();
+    totalarr.splice(selected, 1);
+    selected = -1;
+    updateComponents();
+    editables = [];
+    setting(editables, false);
+    UIEventHandler1.toggleDeleted(false);
+    console.log(3141)
+  });
+  
+  
 }
+// function handleDeletions(){
 
+//   for (let i = 0; i < UIEventHandler1.buttons.length; i++){
+//     UIEventHandler1.buttons[i].mouseClicked(function(){
+//       console.log(31)
+//       if (UIEventHandler1.buttonIDs[i] == "Delete"){
+//         //console.log(trash, selected)
+//         if (selected < componentarr.length){
+//           //componentarr[selected].remove();
+//           componentarr.splice(selected, 1);
+//         }
+         
+//         //totalarr[selected].remove();
+//         totalarr.splice(selected, 1);
+//         selected = -1;
+//         updateComponents();
+//         editables = [];
+//         setting(editables, false);
+//       }
+//     }); //to prevent the buttons from being clicked
+//   }
+//   // let trash = select("#Delete");
+//   // if (trash != null){
+//   //   trash.mouseClicked(function(){
+//   //   //console.log(trash, selected)
+//   //   if (selected < componentarr.length){
+//   //     //componentarr[selected].remove();
+//   //     componentarr.splice(selected, 1);
+//   //   }
+     
+//   //   //totalarr[selected].remove();
+//   //   totalarr.splice(selected, 1);
+//   //   selected = -1;
+//   //   updateComponents();
+//   //   editables = [];
+//   //   setting(editables, false);
+//   // });
+//   // }
+// }
+function updateSettings(bool){
+  let settingelt = select("#settings");
+  if (bool){
+    settingelt.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-100 m-1 min-w-full max-w-full");
+    settingelt.elt.classList.remove("scale-0");
+  } else {
+    //console.log("here");
+    settingelt.elt.classList.remove("scale-100");
+    settingelt.elt.classList.add("scale-0");
+    //settingelt.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-1 min-w-full max-w-full");
+    
+  }
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   sandbox = createGraphics(windowWidth * 0.8, windowHeight);
-  setting(editables, false);
+  
   
 
 
@@ -621,8 +737,14 @@ function setup() {
   //totalarr.push(new Sun(200, 2, 0, 'delta', 600, sandbox));
   UIEventHandler1= new UIEventHandler(sandbox, totalarr, componentarr);
   UIEventHandler1.displayleftinputbar();
+  
+  
   maxid = totalarr.length;
+  setting(editables, false);
+  UIEventHandler1.displayDeleted();
   handleUIClicks();
+
+  
 }
 function updateComponents(){
   for (let i = 0; i < componentarr.length; i++) {
@@ -641,12 +763,9 @@ function updateComponents(){
 }
 function draw() {
   sandbox.background(20);
-
-  //UIEventHandler1.handleleftinputbar();
-  //UIEventHandler1.updateButtons(["Normal_Light", "Flashlight", "Laser", "Sun", "Mirror", "Refractor", "Prism", "Grating" , "Converging_Lens","Diverging_Lens"]);
-  //componentarr = UIEventHandler1.updateButtons[1];
-  //totalarr = UIEventHandler1.updateButtons[0];
+  //handleDeletions();
   updateComponents();
+  //console.log(UIEventHandler1.buttons, UIEventHandler1.buttonIDs)
   //UIEventHandler1.updateButtons();
   if (selected != -1){
     editables = findEditableData(totalarr[selected]);
@@ -667,9 +786,10 @@ function mousePressed(){
     
   //console.log(2)
   if(index != -1){
-    console.log(totalarr[index])
+    UIEventHandler1.toggleDeleted(true);
     totalarr[index].select();
-    setting(editables, true)
+    setting(editables, true);
+    //updateSettings(true);
     //totalarr[index].clicked();
     inputbool = true;
   } else {
@@ -693,7 +813,10 @@ function mousePressed(){
       if (mouseX > 64 && mouseX < windowWidth * 0.8 + 64 && mouseY > 0 && mouseY < windowHeight ){
         totalarr[selected].deselect();
       selected = -1;
+      UIEventHandler1.toggleDeleted(false);
+      //handleDeletions();
       setting(editables, false);
+      //updateSettings(false);
       }
       
     } else if(selected == index) {
@@ -701,10 +824,6 @@ function mousePressed(){
       totalarr[selected].clicked();//drag
       //dragged = true;
     }
-    //console.log(selected, index)
-      //}
-      //let index = selectindex([totalarr[selected]], createVector(mouseX, mouseY))
-    
     }
     
   }

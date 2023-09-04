@@ -156,6 +156,7 @@ function findObjectById(objects, id) {
   return objectMap.get(id);
 }
 
+
 function convertToBasicAngle(degrees) {
   if (degrees > 0) {
     //console.log(degrees)

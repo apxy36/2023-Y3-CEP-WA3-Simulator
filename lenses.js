@@ -47,9 +47,12 @@ class ConvergingLens extends Reflector {
   display(canvas){
     canvas.stroke(0);
     this.updateCoords();
+    canvas.strokeWeight(1);
     canvas.push();
-    canvas.rotate(this.coords.theta * Math.PI / 180);
+    canvas.fill(255);
     canvas.translate(this.pos.x, this.pos.y);
+    canvas.rotate(this.coords.theta * Math.PI / 180);
+    
     canvas.ellipse(0,0, this.coords.magnitude * 2, this.thickness);
     canvas.pop();
     this.displayFocal(this.side);
@@ -131,7 +134,10 @@ class DivergingLens extends Reflector{
   display(canvas){
     canvas.stroke(0);
     this.updateCoords();
+    canvas.strokeWeight(1);
     canvas.push();
+
+    canvas.fill('lightblue');
     canvas.translate(this.pos.x, this.pos.y);
     canvas.rotate(this.coords.theta * PI/ 180);
     canvas.ellipse(0,0, this.coords.magnitude * 2, this.thickness);

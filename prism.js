@@ -4,7 +4,7 @@ class Prism extends Reflector {
     this.coords = new Polar(w / 2, angle);
     
     this.vertices = pts; //point array, with vector objects
-    this.normallen = w / 5;
+    this.normallen = w / 4;
     this.type = "refractor";
     this.componentID = ID;
     this.intersectpts = [];
@@ -42,6 +42,7 @@ class Prism extends Reflector {
   
   display(canvas){
     canvas.stroke(0);
+    canvas.strokeWeight(1);
     if (this.selected){
       canvas.fill(200,200,200);
     }
@@ -62,7 +63,7 @@ class Prism extends Reflector {
     } else if (this.pointadj[0]){ //adjusting pts
       let vertexindex = this.pointadj[1];//index
       console.log(this.voffsetX)
-      this.shiftVertex(mouseX, mouseY, vertexindex);
+      this.shiftVertex(mouseX - 64, mouseY, vertexindex);
     }
     
     //visuals
@@ -108,7 +109,7 @@ class Prism extends Reflector {
   selectVertex(){
     for (let i = 0; i < this.vertices.length; i++){
       let selectedvertex = this.vertices[i];
-      if (collidePointCircle(mouseX, mouseY, selectedvertex.x, selectedvertex.y, 20)){
+      if (collidePointCircle(mouseX - 64, mouseY, selectedvertex.x, selectedvertex.y, 20)){
         
         this.pointadj[1]=i;
         return i;

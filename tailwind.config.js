@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
 module.exports = {
   darkMode: 'class',
   content: ["./*.{html,js}"],
+  mode: 'jit',
   theme: {
     screens: {
       sm: '480px',
@@ -9,7 +11,9 @@ module.exports = {
       lg: '976px',
       xl: '1440px',
     },
+    
     colors: {
+      
       'blue': '#1fb6ff',
       'pink': '#ff49db',
       'orange': '#ff7849',
@@ -17,6 +21,7 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
+      
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
@@ -26,6 +31,10 @@ module.exports = {
       spacing: {
         '128': '32rem',
         '144': '36rem',
+        
+      },
+      colors: {
+        primary:"#202225",
       },
       borderRadius: {
         '4xl': '2rem',

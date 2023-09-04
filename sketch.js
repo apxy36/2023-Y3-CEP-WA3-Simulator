@@ -83,7 +83,7 @@ function styleinput(input, x,y, main, label, w = "7"){
       maininput.position( x,y);
       let labelinput = createDiv(label);
       labelinput.parent(maininput);
-      labelinput.class(" w-" +w+ " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
+      labelinput.class(" w-" +w+ " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md p-2.5 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
       //let x = createInput(params[i+1][1].x);
       input.style("width", "4em");
       // x.style("margin-left", "1em");
@@ -146,18 +146,18 @@ function styleTable(input, minval,maxval, body, label, w = "45"){
   // input.elt.max = str(maxval);
   let sliderlabel = createElement("ul");
   sliderlabel.parent(subinput);
-  sliderlabel.class("flex justify-between w-full px-[10px]");
+  sliderlabel.class("flex justify-between w-full px-[10px] dark:text-neutral-50 block mb-2 text-sm font-medium text-gray-900");
 
   let min = createElement("li");
   min.parent(sliderlabel);
-  min.class("flex justify-center relative");
+  min.class("flex justify-center relative text-sm");
   let minlabel = createSpan(minval);
   minlabel.parent(min);
   minlabel.class("absolute");
 
   let max = createElement("li");
   max.parent(sliderlabel);
-  max.class("flex justify-center relative");
+  max.class("flex justify-center relative text-sm");
   let maxlabel = createSpan(maxval);
   maxlabel.parent(max);
   maxlabel.class("absolute");
@@ -215,17 +215,17 @@ function setting(params, selector){ //convert everything in terms of displayheig
   //settings.position(0,0);
   mainsettings.position(windowWidth * 0.8, 0);
   mainsettings.style("height",  '100vh');
-  mainsettings.style("width", '20vw');
+  mainsettings.style("width", '18vw');
   settings.parent(mainsettings);
   //settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
-  mainsettings.class("flex h-auto bg-black");
+  mainsettings.class("flex h-auto bg-primary border-2 border-primary");
   
   //settings.class("h-5/6 bg-gray-500 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-2 min-w-full max-w-full");
   //settings.class("border rounded-sm transform scale-0 absolute transition duration-150 ease-in-out origin-top min-w-32")
   if (selector){
-    settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-2 min-w-full max-w-full");
+    settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-1 min-w-full max-w-full");
   } else {
-    settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-100 m-2 min-w-full max-w-full");
+    settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-100 m-1 min-w-full max-w-full");
   }
   if (params.length > 0){
     let settingsheader = createSpan(params[0].constructor.name);
@@ -321,10 +321,16 @@ for (let i = 0; i < params.length - 1; i++){
         if (isCharNumber(findDifference( str(params[i+1][1]), width.value())) || isCharNumber(findDifference( width.value(), str(params[i+1][1])))){
         if (width.value() == "" || int(width.value()) == 0){
           totalarr[selected].coords.magnitude = 5;
+          if (totalarr[selected].constructor.name == "ConvergingLens" || totalarr[selected].constructor.name == "DivergingLens"){
+            totalarr[selected].width= 5;
+          }
           //totalarr[selected].setPos(int(x.value()), 0);
         } else {
           totalarr[selected].coords.magnitude = int(width.value()) / 2;
           //console.log(totalarr[selected].coords.magnitude)
+          if (totalarr[selected].constructor.name == "ConvergingLens" || totalarr[selected].constructor.name == "DivergingLens"){
+            totalarr[selected].width= int(width.value());
+          }
         }
         updateComponents();
       } else {
@@ -351,19 +357,23 @@ for (let i = 0; i < params.length - 1; i++){
       }
       });
   } else if (params[i+1][0] == "Refractive Coefficients"){
+    let mainrcoeffs = createElement("div");
+    mainrcoeffs.class('flex-col flex w-full');
+    mainrcoeffs.position (windowWidth / 200, 30 + 80 * (i) + 50);
+    mainrcoeffs.parent(settings);
     let rcoeffs = createElement("table");
     rcoeffs.class("table-fixed space-y-3");
 
-    rcoeffs.position(windowWidth / 200, 30 + 80 * (i) + 50);
-    rcoeffs.class("inline-block overflow-x-auto flex flex-col overflow-hidden bg-indigo-500 h-1/3 w-5/6 text-center text-sm font-light rounded-lg");
+    //rcoeffs.position(windowWidth / 200, 30 + 80 * (i) + 50);
+    rcoeffs.class("inline-block overflow-x-auto flex flex-col overflow-hidden bg-indigo-500 h-1/3 w-5/6 text-center font-light rounded-lg");
 
     let thead = createElement("tr");
     thead.parent(rcoeffs);
-    thead.class("font-medium min-w-full bg-gray-600 px-8 py-2 h-12 bg-indigo-700 text-neutral-50 border-b font-bold text-sm");
+    thead.class("flex font-medium min-w-full bg-gray-600 px-2 py-2 h-12 bg-indigo-700 text-neutral-50 border-b font-bold text-sm");
 
     let b = createElement("th");
     b.parent(thead);
-    b.class("w-1/2 px-4 py-2"); // Set the width of the column and add padding
+    b.class("w-1/2 px-2 py-1 top-0 text-center left-0"); // Set the width of the column and add padding
 
     let bval = createSpan("B Coefficients");
     bval.class("text-white"); // Add text color
@@ -371,7 +381,7 @@ for (let i = 0; i < params.length - 1; i++){
 
     let c = createElement("th");
     c.parent(thead);
-    c.class("w-1/2 px-4 py-2"); // Set the width of the column and add padding
+    c.class("w-1/2 px-2 py-1 left-1/2 top-0 text-center"); // Set the width of the column and add padding
 
     let cval = createSpan("C Coefficients");
     cval.class("text-white"); // Add text color
@@ -395,14 +405,45 @@ for (let i = 0; i < params.length - 1; i++){
       }
 
     }
+    let ray;
+    //finds first ray wavelenngth
+    for (let j = 0; j < totalarr.length; j++){
+      if (totalarr[j].type == "Laser" || totalarr[j].type == "Flashlight" || totalarr[j].type == "NormalLight" || totalarr[j].type == "Sun"){
+        for (let k = 0; k < totalarr[j].rays.length; k++){
+        ray = findRayById(totalarr[j].rays[k].raysegments, params[0].intersectIDs[0]);
+        //console.log(ray, totalarr[j].rays[k].raysegments, params[0].intersectIDs[0])
+        if (ray != null){
+          break;
+        }
+      }
+    }
+    }
+    //let component = findObjectById(params[0].id, componentarr);
     inputs = [inputs[0], inputs[2], inputs[4], inputs[1], inputs[3], inputs[5]]; //b0, b1
+    let labelinput;
+    if (ray != null){
+      labelinput = createDiv('Refractive Index: ' + params[0].ricalc(ray.wavelength).toFixed(3) + ' Wavelength: ' + ray.wavelength);
+    } else {
+      labelinput = createDiv('Refractive Index: ' + params[0].ricalc(600).toFixed(3) + ' Wavelength: 600'); 
+    }
+    labelinput.class("dark:font-bold w-5/6 h-16 py-2 text-neutral-50  dark:text-neutral-50 inline-flex text-center px-3 bg-gray-200 border border-r-0 border-gray-300 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600");
+      
+
     for (let j = 0; j < 6; j++){
       inputs[j].input(function () {
         updateRcoeffs(lowerbounds, upperbounds, inputs, params, i+1);
+        //labelinput.html('Refractive Index: ' + params[0].ricalc(600).toFixed(3));
+        if (ray != null){
+          labelinput.html('Refractive Index: ' + params[0].ricalc(ray.wavelength).toFixed(3) + ' Wavelength: ' + ray.wavelength);
+        } else {
+          labelinput.html('Refractive Index: ' + params[0].ricalc(600).toFixed(3) + ' Wavelength: 600'); 
+        }
       });
     }
-    rcoeffs.parent(settings);
-
+    
+    
+    rcoeffs.parent(mainrcoeffs);
+    labelinput.parent(mainrcoeffs);
   } else if (params[i+1][0] == "Wavelength"){
     let wavelength = createInput(params[i+1][1]);
     wavelength.style("width", "4em");
@@ -470,18 +511,18 @@ for (let i = 0; i < params.length - 1; i++){
       });
   } else if (params[i+1][0] == "Focal Length"){
     let flength = createInput(params[i+1][1]);
-    styleinput(flength, windowWidth / 200, 30 + 80 * (i) + 50, settings, "Focal Length: (Max 200)", "30");
+    styleinput(flength, windowWidth / 200, 30 + 80 * (i) + 50, settings, "Focal Length: (Max 1000)", "30");
     flength.input(function () {
         if (isCharNumber(findDifference( str(params[i+1][1]), flength.value())) || isCharNumber(findDifference(flength.value(), str(params[i+1][1])))){
         if (flength.value() == "" || int(flength.value()) == 0){
           totalarr[selected].flength = 1;
           //totalarr[selected].setPos(int(x.value()), 0);
         } else {
-          totalarr[selected].flength = min(int(flength.value()),100);
+          totalarr[selected].flength = min(int(flength.value()),1000);
           //console.log(totalarr[selected].coords.magnitude)
         }
       } else {
-        flength.value(min(params[i+1][1], 200));
+        flength.value(min(params[i+1][1], 1000));
       }
       });
   } else if (params[i+1][0] == "Ray Density"){
@@ -513,37 +554,75 @@ if (selector == false) {
   settings.elt.classList.add("scale-100");
 }
 }
+let UIEventHandler1;
+let maxid = 0;
+function findRayById(objects, id) {
+  const objectMap = new Map();
 
+  // Create a map of IDs to objects
+  for (const obj of objects) {
+    objectMap.set(obj.ID, obj);
+  }
+  //console.log(objectMap)
+  // Retrieve the object by its ID from the map
+  return objectMap.get(id);
+}
+function handleUIClicks(){
+  for (let i = 0; i < UIEventHandler1.buttons.length; i++){
+    UIEventHandler1.buttons[i].mouseClicked(function(){
+      let add = UIEventHandler1.spawnObjects(UIEventHandler1.buttonIDs[i], maxid);
+      if (add != null){
+        console.log(totalarr, componentarr, sourcearr)
+        if (selected == "Laser" || selected == "Flashlight" || selected == "Normal_Light" || selected == "Sun"){
+          sourcearr.push(add);
+        } else {
+          componentarr.push(add);
+          
+        }
+        totalarr = componentarr.concat(sourcearr);
+        maxid+=1;
+        console.log(totalarr, componentarr, sourcearr)
+      }
+    }); //to prevent the buttons from being clicked
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
-
-  sandbox = createGraphics(windowWidth * 0.8, windowHeight * 0.85);
+  sandbox = createGraphics(windowWidth * 0.8, windowHeight);
   setting(editables, false);
+  
+
+
+  
   // settings.position(windowWidth * 0.8, 0);
   // settings.style("height",  '100vh');
   // settings.style("width", '20vw');
   // settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
   //frameRate(1)
   //ray1 = new RayComponent(createVector(50,100), 20, 250, 0);
-  componentarr.push(
-    new Refractor(createVector(400, 200), 100, 100, 0, 30, 1.8, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)
-  );
-  componentarr.push(new Reflector(createVector(100, 300), 100, 90, 1, sandbox));
-  //componentarr.push(new Refractor(createVector(300, 200), 200, 90, 2, 30, 1.5, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]]));
-  componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 2,2.2, 3, sandbox)); //micrometers (double slit)
-  componentarr.push(new Prism(createVector(300,200),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
-  componentarr.push(new ConvergingLens(createVector(300,200),50,0, 4, 100, sandbox));
-  //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 3,2.2)); //micrometers (double slit)
-  
+  // componentarr.push(
+  //   new Refractor(createVector(400, 200), 100, 100, 0, 30, 1.8, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)
+  // );
+  //componentarr.push(new Reflector(createVector(100, 300), 100, 135, 1, sandbox));
+  componentarr.push(new Refractor(createVector(300, 200), 200, 90, 2, 30, 1.5, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
+  //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 2,2.2, 3, sandbox)); //micrometers (double slit)
+  //componentarr.push(new Prism(createVector(300,200),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
+  componentarr.push(new ConvergingLens(createVector(300,200),50,90, 4, 100, sandbox));
+  //componentarr.push(new DivergingLens(createVector(300,300),50,0, 5, 100, sandbox));
+  //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 3,2.2, 3, sandbox)); //micrometers (double slit)
+  //componentarr.push(new Prism(createVector(300,400),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
   totalarr = componentarr;
 
   totalarr.push(new Laser( createVector(100,100),30, 60,  'alpha', 10, sandbox));
-  totalarr.push(new NormalLight(createVector(200,200), 40, 0, 'beta', 600, sandbox));
-  totalarr.push(new Flashlight(createVector(300,300), 40, 1,0, 'gamma', 600, sandbox));
-  totalarr.push(new Sun(200, 2, 0, 'delta', 600, sandbox));
+  totalarr.push(new NormalLight(createVector(200,200), 40, 110, 'beta', 600, sandbox));
+  totalarr.push(new Flashlight(createVector(300,300), 40, 1,110, 'gamma', 500, sandbox));
+  //totalarr.push(new Sun(200, 2, 0, 'delta', 600, sandbox));
+  UIEventHandler1= new UIEventHandler(sandbox, totalarr, componentarr);
+  UIEventHandler1.displayleftinputbar();
+  maxid = totalarr.length;
+  handleUIClicks();
 }
 function updateComponents(){
   for (let i = 0; i < componentarr.length; i++) {
@@ -562,7 +641,13 @@ function updateComponents(){
 }
 function draw() {
   sandbox.background(20);
+
+  //UIEventHandler1.handleleftinputbar();
+  //UIEventHandler1.updateButtons(["Normal_Light", "Flashlight", "Laser", "Sun", "Mirror", "Refractor", "Prism", "Grating" , "Converging_Lens","Diverging_Lens"]);
+  //componentarr = UIEventHandler1.updateButtons[1];
+  //totalarr = UIEventHandler1.updateButtons[0];
   updateComponents();
+  //UIEventHandler1.updateButtons();
   if (selected != -1){
     editables = findEditableData(totalarr[selected]);
     //console.log(editables)
@@ -571,14 +656,14 @@ function draw() {
     inputbool = false;
     }
   }
-  image(sandbox, 0,0);
+  image(sandbox, 64,0);
 }
 var inputbool;
 //var dragged = false;
 function mousePressed(){
   
   if (selected == -1){ //nothing selected
-    let index = selectindex(totalarr, createVector(mouseX, mouseY));
+    let index = selectindex(totalarr, createVector(mouseX - 64, mouseY));
     
   //console.log(2)
   if(index != -1){
@@ -603,9 +688,9 @@ function mousePressed(){
       //shiftVertex(output.x, output.y);
     } else {
       //if (!dragged){
-      let index = selectindex(totalarr, createVector(mouseX, mouseY))
+      let index = selectindex(totalarr, createVector(mouseX - 64, mouseY))
         if(index == -1){
-      if (mouseX > 0 && mouseX < windowWidth * 0.8 && mouseY > 0 && mouseY < windowHeight * 0.85){
+      if (mouseX > 64 && mouseX < windowWidth * 0.8 + 64 && mouseY > 0 && mouseY < windowHeight ){
         totalarr[selected].deselect();
       selected = -1;
       setting(editables, false);

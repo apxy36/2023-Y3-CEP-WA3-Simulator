@@ -1,55 +1,14 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-canvas {
-  display: block;
-}
 
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 400px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #7e7e7e; 
-}
-.flex {
-  display: flex;
-  height: 100vh;
-}
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);; 
-}
-#canvas-container {
-  flex: 1;
-}
-
-#parameters-panel {
-  transition: transform 0.3s;
-  position: relative;
-  width: 20vw;
-  height: 200px;
-  
-
-}
-.params {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  bottom:60vh;
-  left:80vw;
-}
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+.sidebaricon {
+  @apply{
+    relative flex items-center justify-center w-12 h-12  mt-2 mb-2 mx-auto bg-gray-800 rounded-full shadow-lg cursor-pointer hover:bg-indigo-400 hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none
+    transition-all duration-300 ease-in-out;
+  }
+  
+}

@@ -3,7 +3,7 @@ class Reflector {
     this.pos = pos;
     this.coords = new Polar(w / 2, angle);
     this.thickness = w / 10;
-    this.normallen = w / 5;
+    this.normallen = w / 4;
     this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
     this.type = "reflector";
@@ -66,6 +66,7 @@ class Reflector {
     this.updateCoords();
     
     canvas.stroke(0);
+    canvas.strokeWeight(1);
     if (this.selected){
       canvas.fill(200,200,200);
     }
@@ -89,6 +90,7 @@ class Reflector {
     let extendpt1 = p5.Vector.add(pt, normalcoord1.convertCartesian());
     let extendpt2 = p5.Vector.add(pt, normalcoord2.convertCartesian());
     this.displayer.push();
+    this.displayer.stroke(255);
     this.displayer.strokeWeight(1);
     this.displayer.drawingContext.setLineDash([3, 3]);
     this.displayer.line(extendpt1.x, extendpt1.y, extendpt2.x, extendpt2.y);
@@ -207,7 +209,7 @@ class Refractor extends Reflector {
     super(pos, w, angle, ID);
     this.thickness = t;
     this.coords = new Polar(w / 2, angle);
-    this.normallen = w / 5;
+    this.normallen = w / 4;
     this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
     this.type = "refractor";

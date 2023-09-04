@@ -42,7 +42,7 @@ class Flashlight extends Reflector{
     this.maxID = 0;
     this.rays = [];
     let idoffset = 1;
-    for (let i = 0; i < 70; i += rayspacedist){
+    for (let i = 0; i < 30; i += rayspacedist){
       
       //let offset = new Polar(i, this.coords.theta);
       this.maxID += 'r';
@@ -51,7 +51,7 @@ class Flashlight extends Reflector{
       //this.rays[this.rays.length - 1].display();
       
     }
-    for (let i = 0; i < 70; i += rayspacedist){
+    for (let i = 0; i < 30; i += rayspacedist){
       //let offset = new Polar(i, this.coords.theta);
       this.maxID += 'r';
       this.rays.push(new Ray(this.pos, this.coords.theta - 90 - i, 250, this.componentID + (this.maxID ), this.wavelength, this.displayer));
@@ -153,7 +153,7 @@ class Sun{
     
     for (let i = 0; i < this.width; i += rayspacedist){
       let offset = new Polar(i, this.coords.theta);
-      this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta -90, 250, this.componentID + (this.maxID + 1), 450, this.displayer));
+      this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta -90, 250, this.componentID + (this.maxID + 1), this.wavelength, this.displayer));
       this.rays[this.rays.length - 1].generate(componentarr);
       this.rays[this.rays.length - 1].display(this.displayer);
       this.maxID += 1;

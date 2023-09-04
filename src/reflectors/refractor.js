@@ -28,10 +28,20 @@ class Refractor extends Reflector {
     this.refractiveindex = rindex;
     this.rcoeffs = rcoeffs; // B:[] C:[] refractive coeffs for sellmeier eqn
   }
-  ricalc(wavelength){//three term approximation
+  ricalc(wavelength) {
+    //three term approximation
     wavelength = wavelength / 1000; //convert to micrometers
     //this.rcoeffs = [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]];
-    return ((1+(this.rcoeffs[0][0]  * wavelength**2) / (wavelength**2 - this.rcoeffs[1][0]) + (this.rcoeffs[0][1]  * wavelength**2) / (wavelength**2 - this.rcoeffs[1][1]) + (this.rcoeffs[0][2]  * wavelength**2) / (wavelength**2 - this.rcoeffs[1][2])) / wavelength
-           )**0.5
+    return (
+      ((1 +
+        (this.rcoeffs[0][0] * wavelength ** 2) /
+          (wavelength ** 2 - this.rcoeffs[1][0]) +
+        (this.rcoeffs[0][1] * wavelength ** 2) /
+          (wavelength ** 2 - this.rcoeffs[1][1]) +
+        (this.rcoeffs[0][2] * wavelength ** 2) /
+          (wavelength ** 2 - this.rcoeffs[1][2])) /
+        wavelength) **
+      0.5
+    );
   }
 }

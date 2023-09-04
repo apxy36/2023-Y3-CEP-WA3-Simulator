@@ -12,7 +12,7 @@ class Reflector {
     this.intersectedges = [];
     this.intersectIDs = []; //stores unique IDs of ray that intersect with it
     this.displayer = display;
-    
+
     //draggable functionality
     this.dragged = false;
     this.offsetX = 0;
@@ -20,7 +20,7 @@ class Reflector {
     this.minimumWidth = 10;
     this.minimumHeight = 10;
     this.selected = false;
-    
+
     //vertex creation
     this.vertices = [this.start, this.end];
     let offsetcoord = new Polar(this.thickness, this.coords.theta + 90);
@@ -49,11 +49,11 @@ class Reflector {
   }
   display(canvas) {
     this.updateCoords();
-    
+
     canvas.stroke(0);
     canvas.strokeWeight(1);
-    if (this.selected){
-      canvas.fill(200,200,200);
+    if (this.selected) {
+      canvas.fill(200, 200, 200);
     }
     canvas.beginShape();
     for (let i = 0; i < this.vertices.length; i++) {
@@ -61,7 +61,7 @@ class Reflector {
       canvas.vertex(pointer.x, pointer.y);
     }
     canvas.endShape(CLOSE);
-    
+
     this.update();
   }
   displayNormal(pt, edge) {
@@ -82,7 +82,6 @@ class Reflector {
     this.displayer.pop();
   }
   displayIntersects() {
-    
     //console.log(this.intersectIDs);
     for (let i = 0; i < this.intersectpts.length; i++) {
       this.displayNormal(this.intersectpts[i]);
@@ -91,33 +90,31 @@ class Reflector {
     this.intersectedges = [];
     this.intersectIDs = []; //stores unique IDs of ray that intersect with it
   }
-  clicked(){
+  clicked() {
     //if mouse over resize buttons
     //(...)
     this.dragged = true;
     this.offsetX = this.pos.x - mouseX;
     this.offsetY = this.pos.y - mouseY;
-    console.log(this.offsetX, this.offsetY)
+    console.log(this.offsetX, this.offsetY);
   }
-  released(){
+  released() {
     this.dragged = false;
   }
-  
-  
-  update(){
+
+  update() {
     //dragging functionality
-    if (this.dragged){
+    if (this.dragged) {
       this.setPos(mouseX + this.offsetX, mouseY + this.offsetY);
     }
-    
+
     //visuals
-    if (this.selected){
+    if (this.selected) {
       this.displaySelect(this.displayer);
     }
-    
   }
-  
-  setPos(x,y){
+
+  setPos(x, y) {
     let vector_x = x - this.pos.x;
     let vector_y = y - this.pos.y;
 
@@ -131,25 +128,23 @@ class Reflector {
     this.pos.x += vector_x;
     this.pos.y += vector_y;
   }
-  
-  
-  
-  select(){
+
+  select() {
     this.selected = true;
   }
-  
-  deselect(){
+
+  deselect() {
     this.selected = false;
   }
-  
-  displaySelect(canvas){
-    this.displayer.fill(100,100,100,100);
+
+  displaySelect(canvas) {
+    this.displayer.fill(100, 100, 100, 100);
     //avg -> middle of shape
     let centre = findCentre(this.vertices);
-    this.displayer.stroke(100)
+    this.displayer.stroke(100);
     this.displayer.circle(centre.x, centre.y, 10);
-    this.displayer.stroke(0)
-    this.displayer.fill('white');
+    this.displayer.stroke(0);
+    this.displayer.fill("white");
   }
   setRotation(rotation) {
     /*  
@@ -174,34 +169,24 @@ class Reflector {
     //console.log(this.vertices)
     this.coords.theta = rotation;
   }
-
-  
-  
 }
 function findCentre(vertices) {
-  let centreX = 0, centreY = 0;
-  for (let i = 0; i < vertices.length; i++){
+  let centreX = 0,
+    centreY = 0;
+  for (let i = 0; i < vertices.length; i++) {
     centreX += vertices[i].x;
     centreY += vertices[i].y;
   }
-  
+
   return createVector(centreX / vertices.length, centreY / vertices.length);
 }
 
-
-
-
-
-
-function findVertexIndex(vertices, X, Y){
-  for (let i = 0; i < vertices.length; i++){
+function findVertexIndex(vertices, X, Y) {
+  for (let i = 0; i < vertices.length; i++) {
     let vertex = vertices[i];
-    if (vertex.x == x && vertex.y == y){
+    if (vertex.x == x && vertex.y == y) {
       return i;
     }
   }
   return -1;
 }
-
-
-

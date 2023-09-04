@@ -1,8 +1,3 @@
-
-
-
-
-
 function findObjectById(objects, id) {
   const objectMap = new Map();
 
@@ -14,7 +9,6 @@ function findObjectById(objects, id) {
   // Retrieve the object by its ID from the map
   return objectMap.get(id);
 }
-
 
 function convertToBasicAngle(degrees) {
   if (degrees > 0) {
@@ -66,9 +60,8 @@ function vectorSideOfNormal(theta, phi) {
     return 2;
   }
 }
- 
-function vectorSideOfLine(lineAngle, vectorAngle) {
 
+function vectorSideOfLine(lineAngle, vectorAngle) {
   // Calculate the components of the line vector
   const lineX = cos(lineAngle);
   const lineY = sin(lineAngle);
@@ -90,90 +83,105 @@ function vectorSideOfLine(lineAngle, vectorAngle) {
   }
 }
 
-function findIntersection(eqn1, eqn2){
+function findIntersection(eqn1, eqn2) {
   //console.log(eqn1, eqn2)
   return createVector(
-  (-1 * eqn2[1] - (-1) * eqn1[1])/(eqn1[0] * (-1) - eqn2[0] * -1),
-  ((eqn2[0] * eqn1[1] - eqn1[0] * eqn2[1]) / (eqn1[0] * (-1) - eqn2[0] * -1))
-  )
+    (-1 * eqn2[1] - -1 * eqn1[1]) / (eqn1[0] * -1 - eqn2[0] * -1),
+    (eqn2[0] * eqn1[1] - eqn1[0] * eqn2[1]) / (eqn1[0] * -1 - eqn2[0] * -1)
+  );
 }
 
-function convertToEqn(vector, point){
+function convertToEqn(vector, point) {
   //console.log(vector, point)
   let gradient = vector.y / vector.x;
   let yi = point.y - gradient * point.x;
   return [gradient, yi];
 }
 
-
-function extendLinetoEdge(pt1, pt2){
+function extendLinetoEdge(pt1, pt2) {
   //console.log(createVector(pt1.x + (0 - pt1.y) * (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y), 0), createVector(pt1.x + (height - pt1.y) * (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y), height))
-  return [createVector(pt1.x + (-1000 - pt1.y) * (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y), -1000), createVector(pt1.x + (height + 1000 - pt1.y) * (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y), height + 1000)]
+  return [
+    createVector(
+      pt1.x +
+        (-1000 - pt1.y) *
+          (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y),
+      -1000
+    ),
+    createVector(
+      pt1.x +
+        (height + 1000 - pt1.y) *
+          (p5.Vector.sub(pt2, pt1).x / p5.Vector.sub(pt2, pt1).y),
+      height + 1000
+    ),
+  ];
 }
 
-
 // takes wavelength in nm and returns an rgba value
-    function wavelengthToColor(wavelength) {
-        var r,
-            g,
-            b,
-            alpha,
-            colorSpace,
-            wl = wavelength,
-            gamma = 1;
- 
- 
-        if (wl >= 380 && wl < 440) {
-            R = -1 * (wl - 440) / (440 - 380);
-            G = 0;
-            B = 1;
-       } else if (wl >= 440 && wl < 490) {
-           R = 0;
-           G = (wl - 440) / (490 - 440);
-           B = 1;  
-        } else if (wl >= 490 && wl < 510) {
-            R = 0;
-            G = 1;
-            B = -1 * (wl - 510) / (510 - 490);
-        } else if (wl >= 510 && wl < 580) {
-            R = (wl - 510) / (580 - 510);
-            G = 1;
-            B = 0;
-        } else if (wl >= 580 && wl < 645) {
-            R = 1;
-            G = -1 * (wl - 645) / (645 - 580);
-            B = 0.0;
-        } else if (wl >= 645 && wl <= 780) {
-            R = 1;
-            G = 0;
-            B = 0;
-        } else {
-            R = 0;
-            G = 0;
-            B = 0;
-        }
- 
-        // intensty is lower at the edges of the visible spectrum.
-        if (wl > 780 || wl < 380) {
-            alpha = 0;
-        } else if (wl > 700) {
-            alpha = (780 - wl) / (780 - 700);
-        } else if (wl < 420) {
-            alpha = (wl - 380) / (420 - 380);
-        } else {
-            alpha = 1;
-        }
- 
-        colorSpace = ["rgba(" + (R * 100) + "%," + (G * 100) + "%," + (B * 100) + "%, " + alpha + ")", R, G, B, alpha]
- 
-        // colorSpace is an array with 5 elements.
-        // The first element is the complete code as a string.  
-        // Use colorSpace[0] as is to display the desired color.  
-        // use the last four elements alone or together to access each of the individual r, g, b and a channels.  
-       
-        return colorSpace;
-       
-    }
+function wavelengthToColor(wavelength) {
+  var r,
+    g,
+    b,
+    alpha,
+    colorSpace,
+    wl = wavelength,
+    gamma = 1;
+
+  if (wl >= 380 && wl < 440) {
+    R = (-1 * (wl - 440)) / (440 - 380);
+    G = 0;
+    B = 1;
+  } else if (wl >= 440 && wl < 490) {
+    R = 0;
+    G = (wl - 440) / (490 - 440);
+    B = 1;
+  } else if (wl >= 490 && wl < 510) {
+    R = 0;
+    G = 1;
+    B = (-1 * (wl - 510)) / (510 - 490);
+  } else if (wl >= 510 && wl < 580) {
+    R = (wl - 510) / (580 - 510);
+    G = 1;
+    B = 0;
+  } else if (wl >= 580 && wl < 645) {
+    R = 1;
+    G = (-1 * (wl - 645)) / (645 - 580);
+    B = 0.0;
+  } else if (wl >= 645 && wl <= 780) {
+    R = 1;
+    G = 0;
+    B = 0;
+  } else {
+    R = 0;
+    G = 0;
+    B = 0;
+  }
+
+  // intensty is lower at the edges of the visible spectrum.
+  if (wl > 780 || wl < 380) {
+    alpha = 0;
+  } else if (wl > 700) {
+    alpha = (780 - wl) / (780 - 700);
+  } else if (wl < 420) {
+    alpha = (wl - 380) / (420 - 380);
+  } else {
+    alpha = 1;
+  }
+
+  colorSpace = [
+    "rgba(" + R * 100 + "%," + G * 100 + "%," + B * 100 + "%, " + alpha + ")",
+    R,
+    G,
+    B,
+    alpha,
+  ];
+
+  // colorSpace is an array with 5 elements.
+  // The first element is the complete code as a string.
+  // Use colorSpace[0] as is to display the desired color.
+  // use the last four elements alone or together to access each of the individual r, g, b and a channels.
+
+  return colorSpace;
+}
 
 class Ray {
   constructor(origin, angle, intensity, ID, wavelength, display) {
@@ -192,10 +200,17 @@ class Ray {
   }
   generate(components) {
     //this.rgb = wavelengthToColor(this.wavelength);
-    
+
     //this.raysegments[0].pos.theta = this.angle;
     this.raysegments = [
-      new RayComponent(this.origin, this.angle, width * 2, this.mainid, this.wavelength, this.rgb),
+      new RayComponent(
+        this.origin,
+        this.angle,
+        width * 2,
+        this.mainid,
+        this.wavelength,
+        this.rgb
+      ),
     ];
     this.maxid = 0;
     //this.raysegments = this.raysegments.slice(0,1);
@@ -214,8 +229,7 @@ class Ray {
           //this.raysegments[i].terminate(result[2]);
         }
       }
-      
-      
+
       if (finalresult[0] == true) {
         //collision detected
         let component = findObjectById(components, finalresult[4]);
@@ -226,7 +240,7 @@ class Ray {
           finalresult[0]
         );
         //console.log(component.refractiveindex)
-        
+
         let theta = atan(
           -(finalresult[3][1].y - finalresult[3][0].y) /
             -(finalresult[3][1].x - finalresult[3][0].x)
@@ -249,14 +263,13 @@ class Ray {
               finalresult[2],
               angle,
               500,
-              this.mainid + (this.maxid + 1), 
+              this.mainid + (this.maxid + 1),
               this.wavelength,
               this.rgb
             )
           );
           this.maxid += 1;
         } else if (finalresult[1] == 1) {
-          
           // //extend raysegment endpt by +2 -> see if any refractive component. if so, refractive index = component.index else RI = 1.
           let rindex1;
           let rindex2;
@@ -290,7 +303,6 @@ class Ray {
                 break;
               }
               //calc for angle of refraction
-              
             }
           }
           if (!rindex1) {
@@ -318,7 +330,11 @@ class Ray {
           // if (refractionangle < 0){
           //   refractionangle = -refractionangle;
           // }
-          if (rindex2 < rindex1 && Math.abs(baseincidence) > asin(rindex2 / rindex1)) { //TOTAL internal reflection
+          if (
+            rindex2 < rindex1 &&
+            Math.abs(baseincidence) > asin(rindex2 / rindex1)
+          ) {
+            //TOTAL internal reflection
             //console.log(incidence)
             exitangle =
               180 +
@@ -393,26 +409,32 @@ class Ray {
               finalresult[2],
               exitangle,
               width * 2,
-              this.mainid + (this.maxid + 1), 
+              this.mainid + (this.maxid + 1),
               this.wavelength,
               this.rgb
             )
           );
-          
+
           //this.raysegments[this.raysegments.length - 1].display();
           //console.log(this.raysegments)
           this.maxid += 1;
-        } else if (finalresult[1] == 2){ 
-          
-          
+        } else if (finalresult[1] == 2) {
           //Converging lens
           //First, calculate the eqn of a ray going thru the centre of the lens from the origin of the ray component
-          let middleray = p5.Vector.sub(component.pos, this.raysegments[i].start);
+          let middleray = p5.Vector.sub(
+            component.pos,
+            this.raysegments[i].start
+          );
           //temp changing width of lens to the entire length of canvas
           component.coords.magnitude = width;
           let paralleltheta; //determines which side the focal point will be on
           let focalpttheta;
-          if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) == 0){
+          if (
+            vectorSideOfLine(
+              component.coords.theta,
+              this.raysegments[i].pos.theta
+            ) == 0
+          ) {
             paralleltheta = component.coords.theta + 90;
             focalpttheta = component.coords.theta + 90;
             component.side = 0;
@@ -421,31 +443,82 @@ class Ray {
             focalpttheta = component.coords.theta - 90;
             component.side = 1;
           }
-          let tempray = new RayComponent(this.raysegments[i].start, paralleltheta, width, "TEMP");
-          component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());
-          component.end = p5.Vector.add(component.coords.convertCartesian(), component.pos);
+          let tempray = new RayComponent(
+            this.raysegments[i].start,
+            paralleltheta,
+            width,
+            "TEMP"
+          );
+          component.start = p5.Vector.sub(
+            component.pos,
+            component.coords.convertCartesian()
+          );
+          component.end = p5.Vector.add(
+            component.coords.convertCartesian(),
+            component.pos
+          );
           //console.log(tempray.start, tempray.endpt)
-          let tempintercept = collideLineLine(tempray.start.x, tempray.start.y, tempray.endpt.x, tempray.endpt.y, component.start.x, component.start.y, component.end.x, component.end.y, true);
+          let tempintercept = collideLineLine(
+            tempray.start.x,
+            tempray.start.y,
+            tempray.endpt.x,
+            tempray.endpt.y,
+            component.start.x,
+            component.start.y,
+            component.end.x,
+            component.end.y,
+            true
+          );
           tempintercept = createVector(tempintercept.x, tempintercept.y);
           let focaloffset = new Polar(component.flength, focalpttheta);
-          
-          let focalpt = p5.Vector.add(component.pos, focaloffset.convertCartesian());
-          point(focalpt.x, focalpt.y)
+
+          let focalpt = p5.Vector.add(
+            component.pos,
+            focaloffset.convertCartesian()
+          );
+          point(focalpt.x, focalpt.y);
           //two lines: focalpt to tempintercept and this.start to component.pos
 
           strokeWeight(1);
           let extendedparallelline = extendLinetoEdge(focalpt, tempintercept);
-          let extendedmiddleline = extendLinetoEdge(component.pos, this.raysegments[i].start);
+          let extendedmiddleline = extendLinetoEdge(
+            component.pos,
+            this.raysegments[i].start
+          );
           // line(extendedparallelline[0].x, extendedparallelline[0].y, extendedparallelline[1].x, extendedparallelline[1].y);
           // line(extendedmiddleline[0].x, extendedmiddleline[0].y, extendedmiddleline[1].x, extendedmiddleline[1].y)
-          let intersection = collideLineLine(extendedparallelline[0].x, extendedparallelline[0].y, extendedparallelline[1].x, extendedparallelline[1].y, extendedmiddleline[0].x, extendedmiddleline[0].y, extendedmiddleline[1].x, extendedmiddleline[1].y, true);
-          intersection = createVector(intersection.x, intersection.y)
+          let intersection = collideLineLine(
+            extendedparallelline[0].x,
+            extendedparallelline[0].y,
+            extendedparallelline[1].x,
+            extendedparallelline[1].y,
+            extendedmiddleline[0].x,
+            extendedmiddleline[0].y,
+            extendedmiddleline[1].x,
+            extendedmiddleline[1].y,
+            true
+          );
+          intersection = createVector(intersection.x, intersection.y);
           //point(intersection.x, intersection.y)
           component.coords.magnitude = component.width / 2;
-          component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());
-          component.end = p5.Vector.add(component.coords.convertCartesian(), component.pos);
-          let newangle = atan2(p5.Vector.sub(intersection, finalresult[2]).y, p5.Vector.sub(intersection, finalresult[2]).x);
-          if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) != vectorSideOfLine(component.coords.theta, newangle)){
+          component.start = p5.Vector.sub(
+            component.pos,
+            component.coords.convertCartesian()
+          );
+          component.end = p5.Vector.add(
+            component.coords.convertCartesian(),
+            component.pos
+          );
+          let newangle = atan2(
+            p5.Vector.sub(intersection, finalresult[2]).y,
+            p5.Vector.sub(intersection, finalresult[2]).x
+          );
+          if (
+            vectorSideOfLine(
+              component.coords.theta,
+              this.raysegments[i].pos.theta
+            ) != vectorSideOfLine(component.coords.theta, newangle)
+          ) {
             newangle += 180;
           }
           //let extendrayline = extendLinetoEdge(intersection, finalresult[2]);
@@ -460,14 +533,23 @@ class Ray {
               this.rgb
             )
           );
-        } else if (finalresult[1] == 3){
+        } else if (finalresult[1] == 3) {
           //First, calculate the eqn of a ray going thru the centre of the lens from the origin of the ray component
-          let middleray = p5.Vector.sub(component.pos, this.raysegments[i].start);
+          let middleray = p5.Vector.sub(
+            component.pos,
+            this.raysegments[i].start
+          );
           //temp changing width of lens to the entire length of canvas
           component.coords.magnitude = width;
           let paralleltheta; //determines which side the focal point will be on
           let focalpttheta;
-          if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) == 0){ //double check //theta works
+          if (
+            vectorSideOfLine(
+              component.coords.theta,
+              this.raysegments[i].pos.theta
+            ) == 0
+          ) {
+            //double check //theta works
             paralleltheta = component.coords.theta + 90;
             focalpttheta = component.coords.theta - 90;
             component.side = 0;
@@ -476,23 +558,68 @@ class Ray {
             focalpttheta = component.coords.theta + 90;
             component.side = 1;
           }
-          let tempray = new RayComponent(this.raysegments[i].start, paralleltheta, width, "TEMP");
-          component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());
-          component.end = p5.Vector.add(component.coords.convertCartesian(), component.pos);
-          let tempintercept = collideLineLine(tempray.start.x, tempray.start.y, tempray.endpt.x, tempray.endpt.y, component.start.x, component.start.y, component.end.x, component.end.y, true);
+          let tempray = new RayComponent(
+            this.raysegments[i].start,
+            paralleltheta,
+            width,
+            "TEMP"
+          );
+          component.start = p5.Vector.sub(
+            component.pos,
+            component.coords.convertCartesian()
+          );
+          component.end = p5.Vector.add(
+            component.coords.convertCartesian(),
+            component.pos
+          );
+          let tempintercept = collideLineLine(
+            tempray.start.x,
+            tempray.start.y,
+            tempray.endpt.x,
+            tempray.endpt.y,
+            component.start.x,
+            component.start.y,
+            component.end.x,
+            component.end.y,
+            true
+          );
           tempintercept = createVector(tempintercept.x, tempintercept.y);
           let focaloffset = new Polar(component.flength, focalpttheta);
-          
-          let focalpt = p5.Vector.add(component.pos, focaloffset.convertCartesian());
+
+          let focalpt = p5.Vector.add(
+            component.pos,
+            focaloffset.convertCartesian()
+          );
           point(focalpt.x, focalpt.y);
           strokeWeight(1);
           let extendedparallelline = extendLinetoEdge(focalpt, tempintercept);
-          let extendedmiddleline = extendLinetoEdge(component.pos, this.raysegments[i].start);
-          let intersection = collideLineLine(extendedparallelline[0].x, extendedparallelline[0].y, extendedparallelline[1].x, extendedparallelline[1].y, extendedmiddleline[0].x, extendedmiddleline[0].y, extendedmiddleline[1].x, extendedmiddleline[1].y, true);
+          let extendedmiddleline = extendLinetoEdge(
+            component.pos,
+            this.raysegments[i].start
+          );
+          let intersection = collideLineLine(
+            extendedparallelline[0].x,
+            extendedparallelline[0].y,
+            extendedparallelline[1].x,
+            extendedparallelline[1].y,
+            extendedmiddleline[0].x,
+            extendedmiddleline[0].y,
+            extendedmiddleline[1].x,
+            extendedmiddleline[1].y,
+            true
+          );
           intersection = createVector(intersection.x, intersection.y);
           //point(intersection.x, intersection.y);
-          let newangle = atan2(p5.Vector.sub(intersection, finalresult[2]).y, p5.Vector.sub(intersection, finalresult[2]).x);
-          if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) != vectorSideOfLine(component.coords.theta, newangle)){
+          let newangle = atan2(
+            p5.Vector.sub(intersection, finalresult[2]).y,
+            p5.Vector.sub(intersection, finalresult[2]).x
+          );
+          if (
+            vectorSideOfLine(
+              component.coords.theta,
+              this.raysegments[i].pos.theta
+            ) != vectorSideOfLine(component.coords.theta, newangle)
+          ) {
             newangle += 180;
           }
           //let extendrayline = extendLinetoEdge(intersection, finalresult[2]);
@@ -507,69 +634,71 @@ class Ray {
               this.rgb
             )
           );
-          
-          
-          
-          
-          
-          
-          
-          
+
           component.coords.magnitude = component.width / 2;
-          component.start = p5.Vector.sub(component.pos, component.coords.convertCartesian());
-          component.end = p5.Vector.add(component.coords.convertCartesian(), component.pos);
-        } else if (finalresult[1] == 4){ //Dgrating
-          let angles = []; //stores the entire set of angles of order 
+          component.start = p5.Vector.sub(
+            component.pos,
+            component.coords.convertCartesian()
+          );
+          component.end = p5.Vector.add(
+            component.coords.convertCartesian(),
+            component.pos
+          );
+        } else if (finalresult[1] == 4) {
+          //Dgrating
+          let angles = []; //stores the entire set of angles of order
           let wavelength = this.wavelength; //nanometers
           //Firstly, calculate all possible order angles from the wavelength and the slitdist
-          for (let i = 0; i < component.maxorder; i++){ //limits max to 10
-            if (component.slitdist * 1000 > wavelength){
+          for (let i = 0; i < component.maxorder; i++) {
+            //limits max to 10
+            if (component.slitdist * 1000 > wavelength) {
               angles.push(asin(wavelength / (component.slitdist * 1000))); //unit change to nm
               wavelength += this.wavelength;
             } else break;
           }
           let normaltheta;
           //Now, generate first set of rays
-          if (vectorSideOfLine(component.coords.theta, this.raysegments[i].pos.theta) == 0){ //double check //theta works
+          if (
+            vectorSideOfLine(
+              component.coords.theta,
+              this.raysegments[i].pos.theta
+            ) == 0
+          ) {
+            //double check //theta works
             normaltheta = component.coords.theta + 90;
           } else {
             normaltheta = component.coords.theta - 90;
           }
-          for (let i = 0; i < angles.length; i++){
-            
+          for (let i = 0; i < angles.length; i++) {
             let newtheta = normaltheta + angles[i];
             this.maxid += 1;
             this.raysegments.push(
-            new RayComponent(
-              finalresult[2],
-              newtheta, //the problem here is htat the angles are not being reated properly
-              width * 2,
-              this.mainid + (this.maxid ),
-              this.wavelength,
-              this.rgb
-            )
-           
-          );
+              new RayComponent(
+                finalresult[2],
+                newtheta, //the problem here is htat the angles are not being reated properly
+                width * 2,
+                this.mainid + this.maxid,
+                this.wavelength,
+                this.rgb
+              )
+            );
             //this.raygsegments[this.raysegments.length-1].display();
-            
           }
           //Generate second set of rays
-          for (let i = 0; i < angles.length; i++){
+          for (let i = 0; i < angles.length; i++) {
             this.maxid += 1;
             let newtheta = normaltheta - angles[i];
             this.raysegments.push(
-            new RayComponent(
-              finalresult[2],
-              newtheta,
-              width * 2,
-              this.mainid + (this.maxid),
-              this.wavelength,
-              this.rgb
-            )
-          );
-            
+              new RayComponent(
+                finalresult[2],
+                newtheta,
+                width * 2,
+                this.mainid + this.maxid,
+                this.wavelength,
+                this.rgb
+              )
+            );
           }
-          
         }
       }
     }

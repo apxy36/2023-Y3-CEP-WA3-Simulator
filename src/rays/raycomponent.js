@@ -10,7 +10,7 @@ class RayComponent {
   }
   display(canvas) {
     canvas.strokeWeight(1);
-    canvas.stroke(this.rgb[0])
+    canvas.stroke(this.rgb[0]);
     this.endpt = p5.Vector.add(this.start, this.pos.convertCartesian());
     let arrowpt1 = new Polar(this.pos.magnitude / 2.2, this.pos.theta - 5);
     let arrowpt2 = new Polar(this.pos.magnitude / 2.2, this.pos.theta + 5);
@@ -78,7 +78,8 @@ class RayComponent {
     //console.log(component.vertices.length);
     //console.log(intersectarr, magarr);
 
-    if (magarr.length > 0) { //if intersects are detected
+    if (magarr.length > 0) {
+      //if intersects are detected
       let minmag = min(magarr); //finds intercept closest to start pt of ray
       let minindex = magarr.indexOf(minmag);
       let intersect = intersectarr[minindex];
@@ -89,12 +90,33 @@ class RayComponent {
         return [true, 0, intersect, edge, component.componentID]; //reflector = 0, refractive medium = 1,
       } else if (component.type == "refractor") {
         return [true, 1, intersect, edge, component.componentID, theta];
-      } else if (component.type == "CLens"){
-        return [true, 2, intersect, edge, component.componentID, component.flength];
-      } else if (component.type == "DLens"){
-        return [true, 3, intersect, edge, component.componentID, component.flength];
-      } else if (component.type == "DGrating"){
-        return [true, 4, intersect, edge, component.componentID, component.slitdist];
+      } else if (component.type == "CLens") {
+        return [
+          true,
+          2,
+          intersect,
+          edge,
+          component.componentID,
+          component.flength,
+        ];
+      } else if (component.type == "DLens") {
+        return [
+          true,
+          3,
+          intersect,
+          edge,
+          component.componentID,
+          component.flength,
+        ];
+      } else if (component.type == "DGrating") {
+        return [
+          true,
+          4,
+          intersect,
+          edge,
+          component.componentID,
+          component.slitdist,
+        ];
       }
 
       return [false]; //reflector = 0, refractive medium = 1,
@@ -110,12 +132,11 @@ class RayComponent {
 
   updateCollision(intersect, edge, component) {
     //registers intercept with component
-    
 
-      this.terminate(intersect);
-      let index = component.intersectIDs.indexOf(this.ID); 
+    this.terminate(intersect);
+    let index = component.intersectIDs.indexOf(this.ID);
 
-    if (index != -1 ) {
+    if (index != -1) {
       //if the ID is already registered by the reflector
       //           if(component.intersectpts[index].x != intersect.x || component.intersectpts[index].y != intersect.y){ //if pos of intersection has changed
 
@@ -127,8 +148,7 @@ class RayComponent {
       component.intersectIDs.push(this.ID);
       component.intersectedges.push(edge);
     }
-    
-    
+
     //return [true, 0, intersect, edge]; //reflector = 0, refractive medium = 1, clens = 2, dlens = 3
 
     if (index != -1) {

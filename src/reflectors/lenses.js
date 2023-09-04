@@ -1,5 +1,5 @@
 class ConvergingLens extends Reflector {
-  constructor(pos, w, angle, ID, focallength, display ){
+  constructor(pos, w, angle, ID, focallength, display) {
     super(pos, w, angle, ID);
     this.flength = focallength;
     this.width = w;
@@ -45,42 +45,42 @@ class ConvergingLens extends Reflector {
     //console.log(index)
     this.displayvertices = [extrapt3, extrapt4, extrapt2, extrapt1];
   }
-  display(canvas){
+  display(canvas) {
     canvas.stroke(0);
     this.updateCoords();
     canvas.strokeWeight(1);
     canvas.push();
-    canvas.fill('blue');
-    canvas.stroke('white');
+    canvas.fill("blue");
+    canvas.stroke("white");
     canvas.translate(this.pos.x, this.pos.y);
-    canvas.rotate(this.coords.theta * Math.PI / 180);
-    
-    canvas.ellipse(0,0, this.coords.magnitude * 2, this.thickness);
+    canvas.rotate((this.coords.theta * Math.PI) / 180);
+
+    canvas.ellipse(0, 0, this.coords.magnitude * 2, this.thickness);
     canvas.pop();
     this.displayFocal(this.side);
     this.update();
   }
-  displayFocal(side){
+  displayFocal(side) {
     let offset = new Polar(this.flength, this.coords.theta);
-    if (side == 0){
+    if (side == 0) {
       offset.theta += 90;
     } else {
       offset.theta -= 90;
     }
-    
+
     this.displayer.strokeWeight(5);
     this.displayer.stroke("white");
     let result = p5.Vector.add(this.pos, offset.convertCartesian());
     this.displayer.point(result.x, result.y);
   }
-  setRotation(angle){
+  setRotation(angle) {
     this.coords.theta = angle;
     this.updateCoords();
   }
 }
 
-class DivergingLens extends Reflector{
-  constructor(pos, w, angle, ID, focallength, display ){
+class DivergingLens extends Reflector {
+  constructor(pos, w, angle, ID, focallength, display) {
     super(pos, w, angle, ID);
     this.flength = focallength;
     this.width = w;
@@ -96,7 +96,7 @@ class DivergingLens extends Reflector{
     this.intersectIDs = []; //stores unique IDs of ray that intersect with it
     this.displayer = display;
     this.side = 0;
-    
+
     //draggable functionality
     this.dragged = false;
     this.offsetX = 0;
@@ -134,23 +134,23 @@ class DivergingLens extends Reflector{
     //console.log(index)
     this.displayvertices = [extrapt3, extrapt4, extrapt2, extrapt1];
   }
-  display(canvas){
+  display(canvas) {
     canvas.stroke(0);
     this.updateCoords();
     canvas.strokeWeight(1);
     canvas.push();
 
-    canvas.fill('lightblue');
+    canvas.fill("lightblue");
     canvas.translate(this.pos.x, this.pos.y);
-    canvas.rotate(this.coords.theta * PI/ 180);
-    canvas.ellipse(0,0, this.coords.magnitude * 2, this.thickness);
+    canvas.rotate((this.coords.theta * PI) / 180);
+    canvas.ellipse(0, 0, this.coords.magnitude * 2, this.thickness);
     canvas.pop();
     this.displayFocal(this.side);
     this.update();
   }
-  displayFocal(side){
+  displayFocal(side) {
     let offset = new Polar(this.flength, this.coords.theta);
-    if (side == 0){
+    if (side == 0) {
       offset.theta -= 90;
     } else {
       offset.theta += 90;
@@ -160,10 +160,8 @@ class DivergingLens extends Reflector{
     let result = p5.Vector.add(this.pos, offset.convertCartesian());
     this.displayer.point(result.x, result.y);
   }
-  setRotation(angle){
+  setRotation(angle) {
     this.coords.theta = angle;
     this.updateCoords();
   }
-  
-  
 }

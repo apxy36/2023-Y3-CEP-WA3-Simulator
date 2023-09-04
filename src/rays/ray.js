@@ -262,7 +262,7 @@ class Ray {
             new RayComponent(
               finalresult[2],
               angle,
-              500,
+              width * 2,
               this.mainid + (this.maxid + 1),
               this.wavelength,
               this.rgb

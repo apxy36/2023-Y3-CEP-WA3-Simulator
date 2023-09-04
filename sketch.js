@@ -226,9 +226,7 @@ function setting(params, selector, parent){ //convert everything in terms of dis
   //settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
   mainsettings.class("flex h-auto bg-primary border-2 border-primary");
   
-  //settings.class("h-5/6 bg-gray-500 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-2 min-w-full max-w-full");
-  //settings.class("border rounded-sm transform scale-0 absolute transition duration-150 ease-in-out origin-top min-w-32")
-  if (selector){
+  if (selector){ //is the settings menu open?
     settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-1 min-w-full max-w-full");
   } else {
     settings.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-100 m-1 min-w-full max-w-full");
@@ -548,19 +546,7 @@ for (let i = 0; i < params.length - 1; i++){
       }
       });
   }
-  
-  // trash.mouseClicked(function(){
-  //   console.log(trash, selected)
-  //   if (selected < componentarr.length){
-  //     //componentarr[selected].remove();
-  //     componentarr.splice(selected, 1);
-  //   }
-     
-  //   //totalarr[selected].remove();
-  //   totalarr.splice(selected, 1);
-  //   selected = null;
-  //   updateComponents();
-  // });
+
 } 
   }
   console.log(settings);
@@ -630,18 +616,7 @@ function handleUIClicks(){
           //console.log(totalarr, componentarr, sourcearr);
         }
 
-        //console.log(trash, selected)
-        // if (selected < componentarr.length){
-        //   //componentarr[selected].remove();
-        //   componentarr.splice(selected, 1);
-        // }
-         
-        // //totalarr[selected].remove();
-        // totalarr.splice(selected, 1);
-        // selected = -1;
-        // updateComponents();
-        // editables = [];
-        // setting(editables, false);
+
       } 
     }); //to prevent the buttons from being clicked
   }
@@ -665,97 +640,15 @@ function handleUIClicks(){
   
   
 }
-// function handleDeletions(){
 
-//   for (let i = 0; i < UIEventHandler1.buttons.length; i++){
-//     UIEventHandler1.buttons[i].mouseClicked(function(){
-//       console.log(31)
-//       if (UIEventHandler1.buttonIDs[i] == "Delete"){
-//         //console.log(trash, selected)
-//         if (selected < componentarr.length){
-//           //componentarr[selected].remove();
-//           componentarr.splice(selected, 1);
-//         }
-         
-//         //totalarr[selected].remove();
-//         totalarr.splice(selected, 1);
-//         selected = -1;
-//         updateComponents();
-//         editables = [];
-//         setting(editables, false);
-//       }
-//     }); //to prevent the buttons from being clicked
-//   }
-//   // let trash = select("#Delete");
-//   // if (trash != null){
-//   //   trash.mouseClicked(function(){
-//   //   //console.log(trash, selected)
-//   //   if (selected < componentarr.length){
-//   //     //componentarr[selected].remove();
-//   //     componentarr.splice(selected, 1);
-//   //   }
-     
-//   //   //totalarr[selected].remove();
-//   //   totalarr.splice(selected, 1);
-//   //   selected = -1;
-//   //   updateComponents();
-//   //   editables = [];
-//   //   setting(editables, false);
-//   // });
-//   // }
-// }
-function updateSettings(bool){
-  let settingelt = select("#settings");
-  if (bool){
-    settingelt.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-100 m-1 min-w-full max-w-full");
-    settingelt.elt.classList.remove("scale-0");
-  } else {
-    //console.log("here");
-    settingelt.elt.classList.remove("scale-100");
-    settingelt.elt.classList.add("scale-0");
-    //settingelt.class("h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-1 min-w-full max-w-full");
-    
-  }
-}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   sandbox = createGraphics(windowWidth * 0.8, windowHeight);
-  
-  
-
-
-  
-  // settings.position(windowWidth * 0.8, 0);
-  // settings.style("height",  '100vh');
-  // settings.style("width", '20vw');
-  // settings.style("background: linear-gradient(to bottom, #183D54, #052F58);");
-  //frameRate(1)
-  //ray1 = new RayComponent(createVector(50,100), 20, 250, 0);
-  // componentarr.push(
-  //   new Refractor(createVector(400, 200), 100, 100, 0, 30, 1.8, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)
-  // );
-  //componentarr.push(new Reflector(createVector(100, 300), 100, 135, 1, sandbox));
-  //componentarr.push(new Refractor(createVector(300, 200), 200, 90, 2, 30, 1.5, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
-  //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 2,2.2, 3, sandbox)); //micrometers (double slit)
-  //componentarr.push(new Prism(createVector(300,200),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
-  //done - componentarr.push(new ConvergingLens(createVector(750,450),500,90, 4, 200, sandbox));
-  //componentarr.push(new DivergingLens(createVector(300,300),50,0, 5, 100, sandbox));
-  //d - diff componentarr.push(new DiffractionGrating(createVector(400,400),100 , 90, 3,2.2, 3, sandbox)); //micrometers (double slit)
-  //done - componentarr.push(new Prism(createVector(330,510),50,0, 3, [createVector(0,0), createVector(100,0), createVector(60, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)); finalised
-  //done - sun componentarr.push(new ConvergingLens(createVector(750,450),500,90, 4, 200, sandbox));
-  //d - tele componentarr.push(new ConvergingLens(createVector(450,450),500,90, 1, 350, sandbox));
-  //d - tele componentarr.push(new ConvergingLens(createVector(950,450),500,90, 4, 150, sandbox));
+  componentarr.push(new Reflector(createVector(300, 200), 100, 135, 1, sandbox));
   totalarr = componentarr;
-  //rainbow: laser + prism
-
-  //done - totalarr.push(new Laser( createVector(200,500),30, 90,  'alpha', 10, sandbox)); fnialised
-  //d - diff totalarr.push(new NormalLight(createVector(200,400), 40, 90, 'beta', 600, sandbox));
-  //done - totalarr.push(new Flashlight(createVector(300,350), 40, 1.5,100, 'gamma', 500, sandbox));
-
-
-  //done totalarr.push(new Sun(200, 1.5, 30, 'delta', 600, sandbox));
-  //done - tele totalarr.push(new Sun(200, 1.5, 15, 'delta', 600, sandbox));
+  totalarr.push(new NormalLight(createVector(100,200), 40, 90, 'beta', 600, sandbox));
   UIEventHandler1= new UIEventHandler(sandbox, totalarr, componentarr);
   UIEventHandler1.displayleftinputbar();
   
@@ -864,26 +757,6 @@ function mouseReleased(){
   
 }
 
-function findEditableData(obj){
-    if (obj.type == "reflector"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2]]; //position, rotation, width
-    } else if (obj.constructor.name == "Refractor"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Thickness", obj.thickness], ["Refractive Coefficients", obj.rcoeffs]];
-    } else if (obj.type == "CLens" || obj.type == "DLens"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Focal Length", obj.flength]];
-    } else if (obj.constructor.name == "Prism"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Refractive Coefficients", obj.rcoeffs]];
-    } else if (obj.type == "DGrating"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Maximum Order", obj.maxorder], ["Slit Separation Distance", obj.slitdist]];
-    } else if (obj.type == "NormalLight"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Wavelength", obj.wavelength]];
-    } else if (obj.type == "Laser"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Number of different wavelengths", obj.number]];
-    } else if (obj.type == "Flashlight"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Wavelength", obj.wavelength], ["Ray Density", obj.raydensity]];
-    } else if (obj.type == "Sun"){
-      return [obj, ["Position", obj.pos], ["Angle", obj.coords.theta], ["Width", obj.coords.magnitude * 2], ["Wavelength", obj.wavelength], ["Ray Density", obj.raydensity]];
-    }
-}
+
 
 

@@ -1,5 +1,6 @@
 
 //import { IoIosFlashlight} from "react-icons/io";
+//import Flashlight from "./src/sources/flashlight";
 class UIEventHandler {
   constructor(display, tarr, carr) {
     this.displayer = display;
@@ -16,12 +17,7 @@ class UIEventHandler {
     this.presets = []; //imagelens, sunlens, telescope, rainbow, diffraction
     //this.mainsettings.id("mainsettings");
   }
-  bodyDataInputEditing(input, property) {
-  }
-  //
-  //<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-//   <path d="M15 3.75H9v16.5h6V3.75zM16.5 20.25h3.375c1.035 0 1.875-.84 1.875-1.875V5.625c0-1.036-.84-1.875-1.875-1.875H16.5v16.5zM4.125 3.75H7.5v16.5H4.125a1.875 1.875 0 01-1.875-1.875V5.625c0-1.036.84-1.875 1.875-1.875z"></path>
-// </svg>
+
   displayleftinputbar() {
     this.mainleftinputbar.class("fixed top-0 left-0 h-screen w-16 m-0 flex flex-col shadow-lg items-center bg-primary text-white-shadow");
     // let b1 = createElement("i");
@@ -176,26 +172,6 @@ class UIEventHandler {
     //this.updateButtons(buttonsnames);
     
 
-  }
-  updateButtons(buttonsnames){ //for loop should be sorted out-> works when divelement is only one button eg laser
-    // for (let i = 0; i < buttonsnames.length; i++){
-    //   //console.log(str("#" +buttonsnames[i]))
-    //   let buttonname = buttonsnames[i];
-    //   let divelement = select(str("#" + buttonname));
-    //   //console.log(divelement)
-    // divelement.mousePressed(
-    //   console.log(334)
-    // );
-    // }
-    // //console.log(this.tarr);
-    // for (let i = 0; i < this.tarr.length; i++){}
-
-    // let divelement = select(str("#Laser")); //wat is going on
-    //   //console.log(divelement)
-    // divelement.mousePressed(
-    //   console.log(334)
-    // );
-    // return [this.tarr, this.carr];
   }
   spawnPresets(preset){
     let output = [];

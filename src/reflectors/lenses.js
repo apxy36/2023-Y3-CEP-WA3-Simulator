@@ -50,7 +50,8 @@ class ConvergingLens extends Reflector {
     this.updateCoords();
     canvas.strokeWeight(1);
     canvas.push();
-    canvas.fill(255);
+    canvas.fill('blue');
+    canvas.stroke('white');
     canvas.translate(this.pos.x, this.pos.y);
     canvas.rotate(this.coords.theta * Math.PI / 180);
     

@@ -3,54 +3,49 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href = "/dist/output.css" rel ="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="/dist/output.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
       referrerpolicy="no-referrer"
     />
-    
+
     <meta charset="utf-8" />
-     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-  content: ["./*.{html,js}"],
-  mode: 'jit',
-  theme: {
-    
-    
-    extend: {
-      
-      colors: {
-        primary:"#202225",
-        secondary:"#DFDDDA",
-        invertedindigo:"#b0b91a",
-        invertedgray:"#b4aa9c",
-        tertiary:"#4D4FAD",
-        quartenary:"#363969",
-        invertedquartenary:"#c9c696"
-      },
-      
-    }
-  },
-    }
-  </script>
+      tailwind.config = {
+        content: ["./*.{html,js}"],
+        mode: "jit",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#202225",
+              secondary: "#DFDDDA",
+              invertedindigo: "#b0b91a",
+              invertedgray: "#b4aa9c",
+              tertiary: "#4D4FAD",
+              quartenary: "#363969",
+              invertedquartenary: "#c9c696",
+            },
+          },
+        },
+      };
+    </script>
 
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
       }
-    }
-  </style>
+    </style>
   </head>
   <body>
-
     <script src="sketch.js"></script>
     <script src="/src/UIEvents.js"></script>
-    
+
     <script src="/src/rays/ray.js"></script>
     <script src="/src/rays/raycomponent.js"></script>
     <script src="/src/reflectors/reflector.js"></script>
@@ -58,31 +53,22 @@
     <script src="/src/reflectors/lenses.js"></script>
     <script src="/src/reflectors/diffractiongrating.js"></script>
     <script src="/src/reflectors/refractor.js"></script>
-    
+
     <script src="/src/selector.js"></script>
     <script src="/src/polar.js"></script>
     <script src="/src/sources/flashlight.js"></script>
     <script src="/src/sources/laser.js"></script>
     <script src="/src/sources/normallight.js"></script>
     <script src="/src/sources/sun.js"></script>
-    
-    
+
     <main>
       <!-- <div class="relative h-32 w-32" dir = 'ltr'>
   <div class="relative sticky bottom-0 right-0 h-16 w-16">0?9</div>
 </div> -->
     </main>
-    
-    
 
-
-    
     <!-- Pin to bottom right corner -->
 
-    
-    
-    <script defer src="https://unpkg.com/p5.collide2d">
-      
-      
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
   </body>
 </html>

@@ -615,19 +615,33 @@ function handleUIClicks(){
         totalarr = componentarr.concat(sourcearr);
         maxid+=1;
         console.log(totalarr, componentarr, sourcearr);
-      } else if (UIEventHandler1.buttonIDs[i] == "Delete"){
-        //console.log(trash, selected)
-        if (selected < componentarr.length){
-          //componentarr[selected].remove();
-          componentarr.splice(selected, 1);
+      } else{
+        
+        let preset = UIEventHandler1.spawnPresets(UIEventHandler1.buttonIDs[i]);
+
+        if (preset.length > 0){
+          console.log(preset)
+          maxid = preset[1];
+          console.log(preset)
+          componentarr = preset[0];
+          totalarr = componentarr.concat(sourcearr);
+          //console.log(totalarr, componentarr, sourcearr);
+          
+          //console.log(totalarr, componentarr, sourcearr);
         }
+
+        //console.log(trash, selected)
+        // if (selected < componentarr.length){
+        //   //componentarr[selected].remove();
+        //   componentarr.splice(selected, 1);
+        // }
          
-        //totalarr[selected].remove();
-        totalarr.splice(selected, 1);
-        selected = -1;
-        updateComponents();
-        editables = [];
-        setting(editables, false);
+        // //totalarr[selected].remove();
+        // totalarr.splice(selected, 1);
+        // selected = -1;
+        // updateComponents();
+        // editables = [];
+        // setting(editables, false);
       } 
     }); //to prevent the buttons from being clicked
   }
@@ -722,19 +736,26 @@ function setup() {
   //   new Refractor(createVector(400, 200), 100, 100, 0, 30, 1.8, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)
   // );
   //componentarr.push(new Reflector(createVector(100, 300), 100, 135, 1, sandbox));
-  componentarr.push(new Refractor(createVector(300, 200), 200, 90, 2, 30, 1.5, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
+  //componentarr.push(new Refractor(createVector(300, 200), 200, 90, 2, 30, 1.5, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
   //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 2,2.2, 3, sandbox)); //micrometers (double slit)
   //componentarr.push(new Prism(createVector(300,200),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
-  componentarr.push(new ConvergingLens(createVector(300,200),50,90, 4, 100, sandbox));
+  //done - componentarr.push(new ConvergingLens(createVector(750,450),500,90, 4, 200, sandbox));
   //componentarr.push(new DivergingLens(createVector(300,300),50,0, 5, 100, sandbox));
-  //componentarr.push(new DiffractionGrating(createVector(150,150),50 , 0, 3,2.2, 3, sandbox)); //micrometers (double slit)
-  //componentarr.push(new Prism(createVector(300,400),50,0, 3, [createVector(0,0), createVector(100,0), createVector(40, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox));
+  //d - diff componentarr.push(new DiffractionGrating(createVector(400,400),100 , 90, 3,2.2, 3, sandbox)); //micrometers (double slit)
+  //done - componentarr.push(new Prism(createVector(330,510),50,0, 3, [createVector(0,0), createVector(100,0), createVector(60, -50)], 2, [[1.03961212, 0.231792344, 	1.01046945], [6.00069867 / 1000, 2.00179144 / 100, 	1.03560653 / 100]], sandbox)); finalised
+  //done - sun componentarr.push(new ConvergingLens(createVector(750,450),500,90, 4, 200, sandbox));
+  //d - tele componentarr.push(new ConvergingLens(createVector(450,450),500,90, 1, 350, sandbox));
+  //d - tele componentarr.push(new ConvergingLens(createVector(950,450),500,90, 4, 150, sandbox));
   totalarr = componentarr;
+  //rainbow: laser + prism
 
-  totalarr.push(new Laser( createVector(100,100),30, 60,  'alpha', 10, sandbox));
-  totalarr.push(new NormalLight(createVector(200,200), 40, 110, 'beta', 600, sandbox));
-  totalarr.push(new Flashlight(createVector(300,300), 40, 1,110, 'gamma', 500, sandbox));
-  //totalarr.push(new Sun(200, 2, 0, 'delta', 600, sandbox));
+  //done - totalarr.push(new Laser( createVector(200,500),30, 90,  'alpha', 10, sandbox)); fnialised
+  //d - diff totalarr.push(new NormalLight(createVector(200,400), 40, 90, 'beta', 600, sandbox));
+  //done - totalarr.push(new Flashlight(createVector(300,350), 40, 1.5,100, 'gamma', 500, sandbox));
+
+
+  //done totalarr.push(new Sun(200, 1.5, 30, 'delta', 600, sandbox));
+  //done - tele totalarr.push(new Sun(200, 1.5, 15, 'delta', 600, sandbox));
   UIEventHandler1= new UIEventHandler(sandbox, totalarr, componentarr);
   UIEventHandler1.displayleftinputbar();
   

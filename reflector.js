@@ -295,6 +295,7 @@ class DiffractionGrating extends Reflector{
     this.displayvertices.push(extrapt1);
   }
   updateCoords(){
+    this.thickness = this.width / 10;
         this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
     this.vertices = [this.start, this.end];

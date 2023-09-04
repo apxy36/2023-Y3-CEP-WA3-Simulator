@@ -29,6 +29,7 @@ class ConvergingLens extends Reflector {
     this.displayvertices = [extrapt3, extrapt4, extrapt2, extrapt1];
   }
   updateCoords() {
+    this.thickness = this.width / 10;
     this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
     this.vertices = [this.start, this.end];
@@ -117,6 +118,7 @@ class DivergingLens extends Reflector{
     this.displayvertices = [extrapt3, extrapt4, extrapt2, extrapt1];
   }
   updateCoords() {
+    this.thickness = this.width / 10;
     this.start = p5.Vector.sub(this.pos, this.coords.convertCartesian());
     this.end = p5.Vector.add(this.coords.convertCartesian(), this.pos);
     this.vertices = [this.start, this.end];

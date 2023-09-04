@@ -82,6 +82,7 @@ class Flashlight extends Reflector{
   }
   display(canvas) {
     canvas.stroke(0);
+    canvas.strokeWeight(1);
     this.updateCoords();
     if (this.selected){
       canvas.fill(200,200,200);
@@ -150,7 +151,7 @@ class Sun{
       this.rays = [];
       this.raydensity = min(this.raydensity, 3);
     let rayspacedist = 10 / this.raydensity;
-    
+    this.width = this.coords.magnitude * 2;
     for (let i = 0; i < this.width; i += rayspacedist){
       let offset = new Polar(i, this.coords.theta);
       this.rays.push(new Ray(p5.Vector.add(offset.convertCartesian(), this.start), this.coords.theta -90, 250, this.componentID + (this.maxID + 1), this.wavelength, this.displayer));

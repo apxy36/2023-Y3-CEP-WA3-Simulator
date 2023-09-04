@@ -1,14 +1,5 @@
-
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
-
-.sidebaricon {
-  @apply{
-    relative flex items-center justify-center w-12 h-12  mt-2 mb-2 mx-auto bg-gray-800 rounded-full shadow-lg cursor-pointer hover:bg-indigo-400 hover:rounded-xl text-neutral-50 focus:bg-gray-200 focus:outline-none
-    transition-all duration-300 ease-in-out;
-  }
-  
-}

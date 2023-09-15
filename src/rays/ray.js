@@ -669,6 +669,17 @@ class Ray {
           } else {
             normaltheta = component.coords.theta - 90;
           }
+          this.maxid += 1;
+          this.raysegments.push(
+            new RayComponent(
+              finalresult[2],
+              normaltheta,
+              width * 2,
+              this.mainid + this.maxid,
+              this.wavelength,
+              this.rgb
+            )
+          );
           for (let i = 0; i < angles.length; i++) {
             let newtheta = normaltheta + angles[i];
             this.maxid += 1;

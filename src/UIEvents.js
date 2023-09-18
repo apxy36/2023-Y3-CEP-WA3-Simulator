@@ -446,6 +446,7 @@ class UIEventHandler {
     //convert everything in terms of displayheight and displaywidth
     let remover = select("#mainsettings");
     if (remover != null) {
+      //reloads the settings menu
       remover.remove();
     }
     let mainsettings = createDiv();
@@ -462,7 +463,7 @@ class UIEventHandler {
     mainsettings.class("flex h-auto bg-primary border-2 border-primary");
 
     if (selector) {
-      //is the settings menu open?
+      //is the settings menu open? -> scaling
       settings.class(
         "h-5/6 bg-indigo-600 rounded-md left-0 origin-top ease-in-out shadow-xl transform transition-all duration-300 scale-0 m-1 min-w-full max-w-full"
       );
@@ -472,15 +473,13 @@ class UIEventHandler {
       );
     }
     if (params.length > 0) {
+      //creates the elements to modify the properties of the selected object
       let settingsheader = createSpan(params[0].constructor.name);
       settingsheader.class(
         " h-5 rounded-md py-3 text-lg top-0 left-0 font-medium text-white text-left"
       );
       settingsheader.parent(settings);
       settingsheader.position(10, windowHeight / 150);
-      //settings.removeClass("hidden");
-      // settings.elt.classList.remove("scale-0");
-      // settings.elt.classList.add("scale-100");
       for (let i = 0; i < params.length - 1; i++) {
         let label = createSpan(params[i + 1][0]);
         label.class(
@@ -649,6 +648,7 @@ class UIEventHandler {
             }
           });
         } else if (params[i + 1][0] == "Refractive Coefficients") {
+          //UI for modifying refractive coefficients
           let mainrcoeffs = createElement("div");
           mainrcoeffs.class("flex-col flex w-full");
           mainrcoeffs.position(windowWidth / 200, 30 + 80 * i + 50);
@@ -922,6 +922,7 @@ class UIEventHandler {
             }
           });
         } else if (params[i + 1][0] == "Focal Length") {
+          //handles focal length input
           let flength = createInput(params[i + 1][1]);
           styleinput(
             flength,

@@ -11,6 +11,7 @@ let editables = [];
 //let UIEvent = new UIEvents();
 
 function isValid(charC, text) {
+  //checking if the input is an integer
   if (charC == 46) {
     if (text.indexOf(".") === -1) {
       return true;
@@ -63,8 +64,8 @@ function isCharNumber(c) {
 }
 
 function styleinput(input, x, y, main, label, w = "7") {
+  //tailwind styling for the input tabs
   let maininput = createDiv();
-  //bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32
   maininput.class("mb-4 h-10 flex ");
   maininput.parent(main);
   maininput.position(x, y);
@@ -75,57 +76,32 @@ function styleinput(input, x, y, main, label, w = "7") {
       w +
       " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md p-2.5 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
   );
-  //let x = createInput(params[i+1][1].x);
   input.style("width", "4em");
-  // x.style("margin-left", "1em");
-  // x.style("margin-right", "1em");
-  // x.style("margin-bottom", "0.5em");
-  // x.style("border-radius", "0.5em");
   input.parent(maininput);
   input.class(
     "h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
   );
-
-  // input.style("width", "4em");
-  // input.style("margin-left", "1em");
-  // input.style("margin-right", "1em");
-  // input.style("margin-bottom", "0.5em");
-  // input.class("block w-full p-4 h-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
-  // input.position(x,y);
-  // input.parent(settings);
 }
-function styleinput2(input, x, y, main, label, w = "7") {
-  let maininput = createDiv();
-  //bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32
-  maininput.class("mb-4 h-10 flex ");
-  //maininput.parent(main);
-  maininput.position(x, y);
-  let labelinput = createDiv(label);
-  labelinput.parent(maininput);
-  labelinput.class(
-    " w-" +
-      w +
-      " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
-  );
-  //let x = createInput(params[i+1][1].x);
-  input.style("width", "4em");
-  // x.style("margin-left", "1em");
-  // x.style("margin-right", "1em");
-  // x.style("margin-bottom", "0.5em");
-  // x.style("border-radius", "0.5em");
-  input.parent(maininput);
-  input.class(
-    "h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-  );
 
-  // input.style("width", "4em");
-  // input.style("margin-left", "1em");
-  // input.style("margin-right", "1em");
-  // input.style("margin-bottom", "0.5em");
-  // input.class("block w-full p-4 h-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500");
-  // input.position(x,y);
-  // input.parent(settings);
-}
+// function styleinput2(input, x, y, main, label, w = "7") { - function that might still be needed in future?
+//   //for the table -
+//   let maininput = createDiv();
+//   maininput.class("mb-4 h-10 flex ");
+//   maininput.parent(main);
+//   maininput.position(x, y);
+//   let labelinput = createDiv(label);
+//   labelinput.parent(maininput);
+//   labelinput.class(
+//     " w-" +
+//       w +
+//       " h-10 text-gray-500 dark:text-gray-400 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
+//   );
+//   input.style("width", "4em");
+//   input.parent(maininput);
+//   input.class(
+//     "h-10 rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+//   );
+// }
 
 function styleTable(input, minval, maxval, body, label, w = "45") {
   let maininput = createElement("td");
@@ -147,8 +123,6 @@ function styleTable(input, minval, maxval, body, label, w = "45") {
   input.class(
     "rounded-lg dark:bg-gray-700 accent-blue-500 transparent h-[4px] w-full cursor-pointer appearance-none border-transparent"
   );
-  // input.elt.min = str(minval);
-  // input.elt.max = str(maxval);
   let sliderlabel = createElement("ul");
   sliderlabel.parent(subinput);
   sliderlabel.class(
@@ -170,7 +144,7 @@ function styleTable(input, minval, maxval, body, label, w = "45") {
   maxlabel.class("absolute");
 }
 
-function updateRcoeffs(
+function updateRcoeffs( //function to update values of R coefficients once modified
   lowerbounds,
   upperbounds,
   coeffinputs,
@@ -183,31 +157,15 @@ function updateRcoeffs(
     //b and c coefficients
     for (let j = 0; j < 3; j++) {
       //3 coeffs
-      // if (isCharNumber(findDifference( str(params[paramindex][1][i][j]), coeffinputs[3 * i + j].value())) || isCharNumber(findDifference( coeffinputs[3*i + j].value(), str(params[paramindex][1][i][j])))){
-
-      //   if (coeffinputs[3 * i + j].value() == ""){
-      //     //totalarr[selected].setPos(0, int(y.value()));
-      //     //console.log(lowerbounds[i][j])
-      //     totalarr[selected].rcoeffs[i][j] = lowerbounds[i][j];
-      //     coeffinputs[3 * i + j].value(lowerbounds[i][j]);
-      //   } else {
       let val = coeffinputs[3 * i + j].value();
       val = float(coeffinputs[3 * i + j].value());
-      //if (val.charAt(val.length - 1) != "."){
-
       if (val > upperbounds[i][j]) {
         val = upperbounds[i][j];
       } else if (val < lowerbounds[i][j]) {
         val = lowerbounds[i][j];
       }
       totalarr[selected].rcoeffs[i][j] = val;
-      //console.log(totalarr[selected].rcoeffs[i][j], totalarr[selected].rcoeffs);
-      //}
-
-      //console.log(val, coeffinputs[3 * i + j].value())
       coeffinputs[3 * i + j].value(val);
-
-      //totalarr[selected].setPos(int(x.value()), int(y.value()));
     }
   }
 }
@@ -229,6 +187,7 @@ function handleUIClicks() {
   console.log(UIEventHandler1.buttons, UIEventHandler1.buttonIDs);
   console.log(UIEventHandler1.buttons.length);
   for (let i = 0; i < UIEventHandler1.buttons.length - 1; i++) {
+    //handles all input buttons that add components
     UIEventHandler1.buttons[i].mouseClicked(function () {
       console.log(UIEventHandler1.buttonIDs[i]);
       let add = UIEventHandler1.spawnObjects(
@@ -236,7 +195,6 @@ function handleUIClicks() {
         maxid
       );
       if (add != null) {
-        //console.log(totalarr, componentarr, sourcearr)
         if (
           selected == "Laser" ||
           selected == "Flashlight" ||
@@ -257,23 +215,18 @@ function handleUIClicks() {
           maxid = preset[1];
           componentarr = preset[0];
           totalarr = componentarr.concat(sourcearr);
-          //console.log(totalarr, componentarr, sourcearr);
-
-          //console.log(totalarr, componentarr, sourcearr);
         }
       }
     }); //to prevent the buttons from being clicked
   }
   console.log(UIEventHandler1.buttons[UIEventHandler1.buttons.length - 1]);
   UIEventHandler1.buttons[UIEventHandler1.buttons.length - 1].mouseClicked(
+    //logic for delete button
     function () {
       //del button
       if (selected < componentarr.length) {
-        //componentarr[selected].remove();
         componentarr.splice(selected, 1);
       }
-
-      //totalarr[selected].remove();
       totalarr.splice(selected, 1);
       selected = -1;
       updateComponents();
@@ -326,10 +279,7 @@ function updateComponents() {
 }
 function draw() {
   sandbox.background(20);
-  //handleDeletions();
   updateComponents();
-  //console.log(UIEventHandler1.buttons, UIEventHandler1.buttonIDs)
-  //UIEventHandler1.updateButtons();
   if (selected != -1) {
     editables = findEditableData(totalarr[selected]);
     //console.log(editables)
@@ -398,10 +348,8 @@ function mouseReleased() {
   if (selected != -1) {
     if (totalarr[selected].dragged) {
       totalarr[selected].released();
-      //dragged = false;
     } else if (totalarr[selected].vertices.length == 3) {
       totalarr[selected].pointadj[0] = false;
-      //dragged = false;
     }
   }
 }

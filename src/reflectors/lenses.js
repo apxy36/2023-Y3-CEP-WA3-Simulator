@@ -61,6 +61,7 @@ class ConvergingLens extends Reflector {
     this.update();
   }
   displayFocal(side) {
+    //side = 0 for left, side = 1 for right
     let offset = new Polar(this.flength, this.coords.theta);
     if (side == 0) {
       offset.theta += 90;

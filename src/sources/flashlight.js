@@ -30,9 +30,6 @@ class Flashlight extends Reflector {
     let offsetvector = offsetcoord.convertCartesian();
     let extrapt1 = p5.Vector.add(this.start, offsetvector);
     let extrapt2 = p5.Vector.add(this.end, offsetvector);
-    //let points = [extrapt2, extrapt1, this.start, this.end];
-    //let index = this.vertices.indexOf(extrapt1);
-    //console.log(index)
     this.vertices.push(extrapt2);
     this.vertices.push(extrapt1);
   }
@@ -43,6 +40,7 @@ class Flashlight extends Reflector {
     this.rays = [];
     let idoffset = 1;
     for (let i = 0; i < 30; i += rayspacedist) {
+      //generate rays for one side of the flashlight
       //let offset = new Polar(i, this.coords.theta);
       this.maxID += "r";
       this.rays.push(
@@ -59,6 +57,7 @@ class Flashlight extends Reflector {
       //this.rays[this.rays.length - 1].display();
     }
     for (let i = 0; i < 30; i += rayspacedist) {
+      //generate rays for the other side of the flashlight
       //let offset = new Polar(i, this.coords.theta);
       this.maxID += "r";
       this.rays.push(
@@ -87,9 +86,6 @@ class Flashlight extends Reflector {
     let offsetvector = offsetcoord.convertCartesian();
     let extrapt1 = p5.Vector.add(this.start, offsetvector);
     let extrapt2 = p5.Vector.add(this.end, offsetvector);
-    //let points = [extrapt2, extrapt1, this.start, this.end];
-    //let index = this.vertices.indexOf(extrapt1);
-    //console.log(index)
     this.vertices.push(extrapt2);
     this.vertices.push(extrapt1);
   }
@@ -112,6 +108,5 @@ class Flashlight extends Reflector {
     canvas.endShape(CLOSE);
     canvas.pop();
     this.update();
-    //line(this.start.x, this.start.y, this.end.x, this.end.y)
   }
 }

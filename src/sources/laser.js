@@ -19,9 +19,6 @@ class Laser extends Reflector {
     let offsetvector = offsetcoord.convertCartesian();
     let extrapt1 = p5.Vector.add(this.start, offsetvector);
     let extrapt2 = p5.Vector.add(this.end, offsetvector);
-    //let points = [extrapt2, extrapt1, this.start, this.end];
-    //let index = this.vertices.indexOf(extrapt1);
-    //console.log(index)
     this.vertices.push(extrapt2);
     this.vertices.push(extrapt1);
   }
@@ -59,9 +56,6 @@ class Laser extends Reflector {
     let offsetvector = offsetcoord.convertCartesian();
     let extrapt1 = p5.Vector.add(this.start, offsetvector);
     let extrapt2 = p5.Vector.add(this.end, offsetvector);
-    //let points = [extrapt2, extrapt1, this.start, this.end];
-    //let index = this.vertices.indexOf(extrapt1);
-    //console.log(index)
     this.vertices.push(extrapt2);
     this.vertices.push(extrapt1);
     //console.log(this.vertices);

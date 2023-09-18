@@ -46,6 +46,7 @@ class Sun {
     this.displayvertices = [extrapt1, extrapt2, extrapt3, extrapt4];
   }
   generateRays(componentarr) {
+    //generates parallel rays
     this.maxID = 0;
     this.updateCoords();
     this.update();
@@ -86,7 +87,7 @@ class Sun {
     let extrapt2 = p5.Vector.add(middle1, offsetvector2);
     let extrapt3 = p5.Vector.add(middle2, offsetvector2);
     let extrapt4 = p5.Vector.add(middle2, offsetvector1);
-    this.displayvertices = [extrapt1, extrapt2, extrapt3, extrapt4];
+    this.displayvertices = [extrapt1, extrapt2, extrapt3, extrapt4]; //these are the vertices that mark the selectable outline of the light source
   }
   displayIntersects() {}
   clicked() {

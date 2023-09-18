@@ -28,6 +28,7 @@ function convertToBasicAngle(degrees) {
 }
 
 function vectorSideOfNormal(theta, phi) {
+  //ray side of normal
   //L =0-> >0 R =1 -> <0
   // if(vectorSideOfLine(theta, phi) == 1){
   //   phi += 180;
@@ -218,6 +219,7 @@ class Ray {
     //this.raysegments = [new RayComponent(this.origin, this.angle, 500, this.ID * 10)];
     let len = this.raysegments.length;
     for (let i = 0; i < this.raysegments.length; i++) {
+      //runs through all components and calculates if new rays must be generated
       //let result;
       let finalresult = [false];
       let angle;
@@ -251,13 +253,9 @@ class Ray {
         //let incidence =  90 - (components[j].coords.theta - this.raysegments[i].pos.theta);
         let incidence = 90 - (theta - this.raysegments[i].pos.theta);
         if (finalresult[1] == 0) {
+          //specific logic for each type of component
           //collision with reflector
-          //console.log(incidence)
-
           angle = 180 + this.raysegments[i].pos.theta - 2 * incidence;
-          //let incidence =  90 - (components[j].coords.theta - theta);
-          //console.log(components[j].coords.theta, this.raysegments[i].pos.theta, incidence, 180 + this.raysegments[i].pos.theta - 2 * incidence );
-          //console.log(theta);
           this.raysegments.push(
             new RayComponent(
               finalresult[2],
@@ -319,17 +317,7 @@ class Ray {
           if (this.raysegments[i].pos.theta < 0) {
             this.raysegments[i].pos.theta += 360;
           }
-          //console.log(incidence, refractionangle); //theta = 180 - component.theta
-          //console.log(rindex1, rindex2)
-          //incidence = incidence % 180;
-
-          //console.log(refractionangle)
-          //console.log(theta + 90 - refractionangle);
-          //console.log("exitangle = " + this.raysegments[i].pos.theta + '+' + baseincidence + '-' + refractionangle)
           let exitangle;
-          // if (refractionangle < 0){
-          //   refractionangle = -refractionangle;
-          // }
           if (
             rindex2 < rindex1 &&
             Math.abs(baseincidence) > asin(rindex2 / rindex1)
@@ -341,39 +329,7 @@ class Ray {
               this.raysegments[i].pos.theta -
               2 * (90 - (theta - this.raysegments[i].pos.theta));
           } else {
-            // exitangle =
-            //   this.raysegments[i].pos.theta + (baseincidence - refractionangle);
-            //     if (finalresult[3][1].x - finalresult[3][0].x < 0 && finalresult[3][1].y - finalresult[3][0].y < 0) { //directed towards the left
-            //       console.log(finalresult[3][1].x - finalresult[3][0].x)
-            //       exitangle =this.raysegments[i].pos.theta - (baseincidence - refractionangle);//+- needs to swap
-            //       //console.log(1)
-            //   //theta += 180;
-            // }
-
-            //             if (theta - this.raysegments[i].pos.theta < 0) {
-            //               exitangle =
-            //               this.raysegments[i].pos.theta + (baseincidence - refractionangle); // 0< angle < 90 and negative -> error
-            //               //negative and 180> angle > 90 -> error
-            //               //right side of normal and negative -> good | right side of normal and normalangle < pos.theta -> +
-            //               //left side of normal and negative -> bad | left side of normal and normalangle > pos.theta -> -
-
-            //               //console.log(baseincidence - refractionangle);
-            //             } else {
-            //               exitangle =
-            //               this.raysegments[i].pos.theta - (baseincidence - refractionangle);
-            //               //console.log(1)
-            //             }
-            //anomaly: right side of normal and 14<153 -> - but should be + | normal in 2nd quad
-
             let side = vectorSideOfNormal(this.raysegments[i].pos.theta, theta);
-            //console.log(convertToBasicAngle(convertToBasicAngle(theta)) + 90, theta + 90, convertToBasicAngle(this.raysegments[i].pos.theta));
-            //console.log(
-            //   side,
-            //   theta,
-            //   convertToBasicAngle(this.raysegments[i].pos.theta)
-            // );
-            //console.log(theta, this.raysegments[i].pos.theta);
-            //console.log(baseincidence, refractionangle)
             if (side == 1) {
               exitangle =
                 this.raysegments[i].pos.theta +
@@ -389,21 +345,6 @@ class Ray {
             }
             //this.raysegments[i].pos.theta < 90 || this.raysegments[i].pos.theta > 270
           }
-
-          //console.log(incidence, refractionangle);
-
-          //console.log(incidence); //crit angle = 33
-          //console.log(exitangle, incidence, refractionangle, theta);
-          //console.log(
-          //   incidence,
-          //   refractionangle,
-          //   this.raysegments[i].pos.theta,
-          //   theta
-          // );
-          // strokeWeight(10)
-          // point(finalresult[2].x, finalresult[2].y)
-          // strokeWeight(1)
-          //console.log(exitangle)
           this.raysegments.push(
             new RayComponent(
               finalresult[2],
@@ -414,9 +355,6 @@ class Ray {
               this.rgb
             )
           );
-
-          //this.raysegments[this.raysegments.length - 1].display();
-          //console.log(this.raysegments)
           this.maxid += 1;
         } else if (finalresult[1] == 2) {
           //Converging lens
@@ -485,8 +423,6 @@ class Ray {
             component.pos,
             this.raysegments[i].start
           );
-          // line(extendedparallelline[0].x, extendedparallelline[0].y, extendedparallelline[1].x, extendedparallelline[1].y);
-          // line(extendedmiddleline[0].x, extendedmiddleline[0].y, extendedmiddleline[1].x, extendedmiddleline[1].y)
           let intersection = collideLineLine(
             extendedparallelline[0].x,
             extendedparallelline[0].y,
@@ -521,8 +457,6 @@ class Ray {
           ) {
             newangle += 180;
           }
-          //let extendrayline = extendLinetoEdge(intersection, finalresult[2]);
-          //line(extendrayline[0].x, extendrayline[0].y, extendrayline[1].x, extendrayline[1].y)
           this.raysegments.push(
             new RayComponent(
               finalresult[2],
@@ -622,8 +556,6 @@ class Ray {
           ) {
             newangle += 180;
           }
-          //let extendrayline = extendLinetoEdge(intersection, finalresult[2]);
-          //line(extendrayline[0].x, extendrayline[0].y, extendrayline[1].x, extendrayline[1].y)
           this.raysegments.push(
             new RayComponent(
               finalresult[2],
@@ -693,7 +625,6 @@ class Ray {
                 this.rgb
               )
             );
-            //this.raygsegments[this.raysegments.length-1].display();
           }
           //Generate second set of rays
           for (let i = 0; i < angles.length; i++) {

@@ -59,7 +59,6 @@ class Prism extends Reflector {
     } else if (this.pointadj[0]) {
       //adjusting pts
       let vertexindex = this.pointadj[1]; //index
-      console.log(this.voffsetX);
       this.shiftVertex(mouseX - 64, mouseY, vertexindex);
     }
 
@@ -87,6 +86,7 @@ class Prism extends Reflector {
   }
 
   setPosPlus(x, y) {
+    //shifts the whole shape by x,y
     for (let index = 0; index < this.vertices.length; index++) {
       let vertex = this.vertices[index];
 
@@ -98,6 +98,7 @@ class Prism extends Reflector {
     this.pos.y += y;
   }
   shiftVertex(x, y, index) {
+    //shifts a vertex to x,y
     //x,y initial vertex, offset as a vector
 
     let vector_x = x - this.vertices[this.pointadj[1]].x;
@@ -129,6 +130,7 @@ class Prism extends Reflector {
   }
 
   clickedVertex() {
+    //pointadj finds the offset of the vertex
     this.pointadj[0] = true;
     this.voffsetX = this.vertices[this.pointadj[1]].x - mouseX;
     this.voffsetY = this.vertices[this.pointadj[1]].y - mouseY;

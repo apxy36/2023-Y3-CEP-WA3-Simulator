@@ -19,8 +19,11 @@ class RayComponent {
     let midpt = p5.Vector.add(this.start, midpoint.convertCartesian());
     let a1 = p5.Vector.add(arrowpt1.convertCartesian(), this.start);
     let a2 = p5.Vector.add(arrowpt2.convertCartesian(), this.start);
+    canvas.push();
+    canvas.drawingContext.setLineDash([3, 3]);
     canvas.line(a1.x, a1.y, midpt.x, midpt.y);
     canvas.line(a2.x, a2.y, midpt.x, midpt.y);
+    canvas.pop();
   }
   terminate(pt) {
     let magnitude = p5.Vector.sub(pt, this.start);

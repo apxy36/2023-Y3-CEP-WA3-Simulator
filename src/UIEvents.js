@@ -706,8 +706,8 @@ class UIEventHandler {
               if (k == 0) {
                 styleTable(
                   input,
-                  lowerbounds[k][j].toFixed(5),
-                  upperbounds[k][j].toFixed(5),
+                  lowerbounds[k][j].toFixed(3),
+                  upperbounds[k][j].toFixed(3),
                   tr,
                   "B" + str(j + 1) + ":",
                   "10"
@@ -715,8 +715,8 @@ class UIEventHandler {
               } else if (k == 1) {
                 styleTable(
                   input,
-                  lowerbounds[k][j].toFixed(5),
-                  upperbounds[k][j].toFixed(5),
+                  lowerbounds[k][j].toFixed(3),
+                  upperbounds[k][j].toFixed(3),
                   tr,
                   "C" + str(j + 1) + ":",
                   "10"
